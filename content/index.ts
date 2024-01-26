@@ -1,27 +1,31 @@
-type Video = {
+type File = {
+    name: string
+    path?: string
+    comment?: string
+}
+
+type Video = File & {
     type: 'video'
-    name: string
 }
 
-type Audio = {
+type Audio = File & {
     type: 'audio'
-    name: string
 }
 
-type Image = {
-    type: 'image',
-    name: string,
+type Image = File & {
+    type: 'image'
 }
 
-type Document = {
+type Document = File & {
     type: 'document'
-    name: string
 }
 
 type Folder = {
     type: 'folder'
     name: string
     files: Files[]
+    obstacle?: 'REVERSED_MOUSE' | 'ACCELERATED_MOUSE' | 'SLOWED_MOUSE' | 'GLITCHED_MOUSE'
+    comment?: string
 }
 
 type Files = Folder | Document | Video | Audio | Image

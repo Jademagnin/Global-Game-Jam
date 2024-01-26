@@ -5,5 +5,5 @@ export type Document = {
 }
 
 export type Schema = {
-    Window: Document[]
+    window: Document[]
 }

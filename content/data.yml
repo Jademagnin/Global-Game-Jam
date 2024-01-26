@@ -1,7 +1,8 @@
-# yaml-language-server: $schema=schema.json
+# yaml-language-server: $schema=./schema.json
 window:
   - type: folder
     name: Projet 1
   - type: folder
     name: Photo
   - type: folder
+    name: Contrats

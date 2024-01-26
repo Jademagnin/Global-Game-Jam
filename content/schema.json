@@ -1,42 +1,86 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
-        "Document": {
-            "properties": {
-                "content": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "$ref": "#/definitions/Document"
-                            },
-                            "type": "array"
+        "Files": {
+            "anyOf": [
+                {
+                    "properties": {
+                        "name": {
+                            "type": "string"
                         },
-                        {
+                        "type": {
+                            "const": "video",
                             "type": "string"
                         }
-                    ]
+                    },
+                    "type": "object"
                 },
-                "name": {
-                    "type": "string"
+                {
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "const": "audio",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
                 },
-                "type": {
-                    "enum": [
-                        "audio",
-                        "folder",
-                        "image",
-                        "text",
-                        "video"
-                    ],
-                    "type": "string"
+                {
+                    "properties": {
+                        "icon": {
+                            "const": "/assets/image.png",
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "const": "image",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "const": "document",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                {
+                    "properties": {
+                        "files": {
+                            "$ref": "#/definitions/Files"
+                        },
+                        "icon": {
+                            "const": "/assets/folder.png",
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "const": "folder",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
                 }
-            },
-            "type": "object"
+            ]
         }
     },
     "properties": {
-        "window": {
+        "desktop": {
             "items": {
-                "$ref": "#/definitions/Document"
+                "$ref": "#/definitions/Files"
             },
             "type": "array"
         }

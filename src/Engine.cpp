@@ -34,3 +34,28 @@ int Engine::run()
     }
     return 0;
 }
+
+void Engine::processEvents()
+{
+    sf::Event event;
+    while (_window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed)
+            _window.close();
+        if (event.type == sf::Event::KeyPressed) {
+            if (event.key.code == sf::Keyboard::Escape)
+                _window.close();
+        }
+    }
+}
+
+void Engine::update(sf::Time deltaTime)
+{
+    _sceneManager.update(deltaTime);
+}
+
+void Engine::render()
+{
+    _window.clear();
+    _sceneManager.render(_window);
+    _window.display();
+}

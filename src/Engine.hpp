@@ -9,13 +9,16 @@
     #define _ENGINE_HPP_
 
 #include <SFML/Graphics.hpp>
-    
+
 class Engine {
     public:
         Engine();
         ~Engine() = default;
 
         int run();
+        void processEvents();
+        void update();
+        void render();
     private:
         sf::RenderWindow _window;
 

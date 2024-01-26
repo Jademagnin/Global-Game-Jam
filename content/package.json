@@ -1,0 +1,14 @@
+{
+  "name": "content",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "bunx typescript-json-schema ./tsconfig.json Schema --out schema.json"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

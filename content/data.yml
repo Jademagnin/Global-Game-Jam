@@ -1,8 +1,21 @@
 # yaml-language-server: $schema=./schema.json
-window:
+desktop:
   - type: folder
     name: Projet 1
+    files:
+      - type: document
+        name: Planning 2020
+      - type: document
+        name: Planning 2020
   - type: folder
     name: Photo
+    files: 
+      - type: image
+        name: Soirée Noël 2024
+      - type: image
+        name: Pot de départ Michel
   - type: folder
     name: Contrats
+    files: 
+      - type: document
+        name: Gazoduc Arabie Saoudite

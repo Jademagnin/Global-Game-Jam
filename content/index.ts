@@ -11,7 +11,6 @@ type Audio = {
 type Image = {
     type: 'image',
     name: string,
-    icon: '/assets/image.png'
 }
 
 type Document = {
@@ -22,8 +21,7 @@ type Document = {
 type Folder = {
     type: 'folder'
     name: string
-    files: Files
-    icon: '/assets/folder.png'
+    files: Files[]
 }
 
 type Files = Folder | Document | Video | Audio | Image

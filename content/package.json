@@ -3,7 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "build": "bunx typescript-json-schema ./tsconfig.json Schema --out schema.json"
+    "build": "bunx typescript-json-schema ./tsconfig.json Schema --out schema.json --required --no-extra-props"
   },
   "devDependencies": {
     "@types/bun": "latest"

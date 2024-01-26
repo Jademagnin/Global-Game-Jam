@@ -13,6 +13,10 @@
                             "type": "string"
                         }
                     },
+                    "required": [
+                        "name",
+                        "type"
+                    ],
                     "type": "object"
                 },
                 {
@@ -25,14 +29,14 @@
                             "type": "string"
                         }
                     },
+                    "required": [
+                        "name",
+                        "type"
+                    ],
                     "type": "object"
                 },
                 {
                     "properties": {
-                        "icon": {
-                            "const": "/assets/image.png",
-                            "type": "string"
-                        },
                         "name": {
                             "type": "string"
                         },
@@ -41,6 +45,10 @@
                             "type": "string"
                         }
                     },
+                    "required": [
+                        "name",
+                        "type"
+                    ],
                     "type": "object"
                 },
                 {
@@ -53,16 +61,19 @@
                             "type": "string"
                         }
                     },
+                    "required": [
+                        "name",
+                        "type"
+                    ],
                     "type": "object"
                 },
                 {
                     "properties": {
                         "files": {
-                            "$ref": "#/definitions/Files"
-                        },
-                        "icon": {
-                            "const": "/assets/folder.png",
-                            "type": "string"
+                            "items": {
+                                "$ref": "#/definitions/Files"
+                            },
+                            "type": "array"
                         },
                         "name": {
                             "type": "string"
@@ -72,6 +83,11 @@
                             "type": "string"
                         }
                     },
+                    "required": [
+                        "files",
+                        "name",
+                        "type"
+                    ],
                     "type": "object"
                 }
             ]
@@ -85,6 +101,9 @@
             "type": "array"
         }
     },
+    "required": [
+        "desktop"
+    ],
     "type": "object"
 }
 

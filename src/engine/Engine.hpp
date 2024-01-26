@@ -17,10 +17,21 @@ class Engine {
 
         int run();
         void processEvents();
-        void update();
+        void update(sf::Time deltaTime);
         void render();
+
+        class SceneManager {
+            public:
+                SceneManager();
+                ~SceneManager();
+
+            protected:
+            private:
+        };
+
     private:
         sf::RenderWindow _window;
+
 
 };
 

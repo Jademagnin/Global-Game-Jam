@@ -15,7 +15,7 @@ Engine::Engine()
     _window.setFramerateLimit(60);
     _window.setActive(true);
     _window.setVerticalSyncEnabled(true);
-    std::cout << "Engine initialized successfully.\n";
+    // std::cout << "Engine initialized successfully.\n";
 }
 
 Engine::~Engine()
@@ -42,13 +42,13 @@ void Engine::processEvents()
         if (event.type == sf::Event::Closed)
             _window.close();
     }
-    std::cout << "Events processed successfully.\n";
+    // std::cout << "Events processed successfully.\n";
 }
 
 void Engine::update(sf::Time deltaTime)
 {
     // Your update logic here...
-    std::cout << "Update completed successfully.\n";
+    // std::cout << "Update completed successfully.\n";
 }
 
 void Engine::render()
@@ -58,5 +58,5 @@ void Engine::render()
     // start a simple black background
     sf::RectangleShape background(sf::Vector2f(1920, 1080));
     _window.display();
-    std::cout << "Render completed successfully.\n";
+    // std::cout << "Render completed successfully.\n";
 }

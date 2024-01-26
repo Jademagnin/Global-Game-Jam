@@ -9,13 +9,13 @@ desktop:
         name: Planning 2020
   - type: folder
     name: Photo
-    files: 
+    files:
       - type: image
         name: Soirée Noël 2024
       - type: image
         name: Pot de départ Michel
   - type: folder
     name: Contrats
-    files: 
+    files:
       - type: document
         name: Gazoduc Arabie Saoudite

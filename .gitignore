@@ -1,3 +1,4 @@
 .vscode
 /jam
 *.o
+/build

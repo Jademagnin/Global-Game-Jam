@@ -13,9 +13,9 @@
 class Engine {
     public:
         Engine();
-        ~Engine() = default;
+        ~Engine();
 
-        int run();
+        void run();
         void processEvents();
         void update(sf::Time deltaTime);
         void render();

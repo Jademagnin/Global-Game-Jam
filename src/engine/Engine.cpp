@@ -18,6 +18,22 @@ Engine::Engine()
     std::cout << "Engine initialized successfully.\n";
 }
 
+Engine::~Engine()
+{
+}
+
+void Engine::run()
+{
+    sf::Clock clock;
+    while (_window.isOpen())
+    {
+        sf::Time deltaTime = clock.restart();
+        processEvents();
+        update(deltaTime);
+        render();
+    }
+}
+
 void Engine::processEvents()
 {
     sf::Event event;

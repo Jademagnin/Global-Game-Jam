@@ -5,41 +5,46 @@
 ** Main.cpp
 */
 
-#include <SFML/Graphics.hpp>
-#include <iostream>
+#ifndef _SHAPE_HPP_
+    #define _SHAPE_HPP_
 
-// Base class for all shapes
-class Shape {
-    public:
-        virtual void draw(sf::RenderWindow& window, const sf::Color& color, const sf::Vector2f& position) = 0;
-        virtual ~Shape() {}
-};
+    #include <SFML/Graphics.hpp>
+    #include <iostream>
 
-// Implementation of Circle
-class Circle : public Shape {
-    public:
-        Circle(float radius) : _radius(radius) {}
-        void draw(sf::RenderWindow& window, const sf::Color& color, const sf::Vector2f& position) override;
-    private:
-        float _radius;
-};
+    // Base class for all shapes
+    class Shape {
+        public:
+            virtual void draw(sf::RenderWindow& window, const sf::Color& color, const sf::Vector2f& position) = 0;
+            virtual ~Shape() {}
+    };
 
-// Implementation of Rectangle
-class Rectangle : public Shape {
-    public:
-        Rectangle(const sf::Vector2f& size) : _size(size) {}
-        void draw(sf::RenderWindow& window, const sf::Color& color, const sf::Vector2f& position) override;
-    private:
-        sf::Vector2f _size;
-};
+    // Implementation of Circle
+    class Circle : public Shape {
+        public:
+            Circle(float radius) : _radius(radius) {}
+            void draw(sf::RenderWindow& window, const sf::Color& color, const sf::Vector2f& position) override;
+        private:
+            float _radius;
+    };
 
-// Factory Design to create shapes
-class ShapeFactory {
-    public:
-        enum class ShapeType {
-            Circle,
-            Rectangle
-        };
+    // Implementation of Rectangle
+    class Rectangle : public Shape {
+        public:
+            Rectangle(const sf::Vector2f& size) : _size(size) {}
+            void draw(sf::RenderWindow& window, const sf::Color& color, const sf::Vector2f& position) override;
+        private:
+            sf::Vector2f _size;
+    };
 
-        static std::unique_ptr<Shape> createShape(ShapeType type, float size);
-};
+    // Factory Design to create shapes
+    class ShapeFactory {
+        public:
+            enum class ShapeType {
+                Circle,
+                Rectangle
+            };
+
+            static std::unique_ptr<Shape> createShape(ShapeType type, float size);
+    };
+
+#endif /* _SHAPE_HPP_ */

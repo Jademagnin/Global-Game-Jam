@@ -5,8 +5,8 @@
 ** Engine.hpp
 */
 
-    #ifndef _ENGINE_HPP_
-    #define _ENGINE_HPP_
+#ifndef _ENGINE_HPP_
+#define _ENGINE_HPP_
 
 #include <SFML/Graphics.hpp>
 

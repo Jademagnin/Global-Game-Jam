@@ -6,8 +6,10 @@
 */
 
 #include "LoadAssets.hpp"
+#include <iostream>
+#include <string>
 
-LoadAssets::LoadAssets()
+LoadAssets::LoadAssets(std::string path, sf::Vector2f pos, sf::Vector2f size)
 {
 }
 

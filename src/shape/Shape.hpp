@@ -10,6 +10,7 @@
 
     #include <SFML/Graphics.hpp>
     #include <iostream>
+    #include <memory>
 
     // Base class for all shapes
     class Shape {

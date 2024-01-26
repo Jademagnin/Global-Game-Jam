@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)  # CMake version check
 project(jam)               # Create project "jam"
-set(CMAKE_CXX_STANDARD 14)            # Enable c++14 standard
+set(CMAKE_CXX_STANDARD 20)            # Enable c++14 standard
 
 # Use GLOB_RECURSE to include all .cpp files recursively
 file(GLOB_RECURSE SOURCE_FILES "./src/*.cpp")

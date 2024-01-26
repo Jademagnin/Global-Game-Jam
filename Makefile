@@ -9,8 +9,8 @@
 
 SHELL   =   /bin/bash
 
-SRC_DIR = engine
-SRC = $(wildcard $(SRC_DIR)/*.cpp)
+SRC_DIR = src
+SRC = $($(SRC_DIR)/*.cpp)
 
 NAME    =   jam
 
@@ -23,7 +23,7 @@ SFML    =   -lsfml-graphics -lsfml-window -lsfml-system
 all: $(NAME)
 
 $(NAME):
-    g++ $(CFLAGS) -o $(NAME) $(SRC) $(SFML)
-    printf "[%s] — Successfully compiled\n" $(NAME)
+	g++ $(CFLAGS) -o $(NAME) $(SRC) $(SFML)
+	printf "[%s] — Successfully compiled\n" $(NAME)
 
 clean:

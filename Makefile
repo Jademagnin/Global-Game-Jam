@@ -5,8 +5,6 @@
 ## Makefile
 ##
 
-.SILENT:
-
 NAME = jam
 CC = g++
 SRC_DIR = ./src

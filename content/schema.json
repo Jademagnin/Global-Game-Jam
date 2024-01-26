@@ -1,74 +1,91 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
-        "Files": {
-            "anyOf": [
+        "Audio": {
+            "allOf": [
                 {
                     "properties": {
+                        "comment": {
+                            "type": "string"
+                        },
                         "name": {
                             "type": "string"
                         },
-                        "type": {
-                            "const": "video",
+                        "path": {
                             "type": "string"
                         }
                     },
                     "required": [
-                        "name",
-                        "type"
+                        "name"
                     ],
                     "type": "object"
                 },
                 {
                     "properties": {
-                        "name": {
-                            "type": "string"
-                        },
                         "type": {
                             "const": "audio",
                             "type": "string"
                         }
                     },
                     "required": [
-                        "name",
                         "type"
                     ],
                     "type": "object"
-                },
+                }
+            ]
+        },
+        "Document": {
+            "allOf": [
                 {
                     "properties": {
+                        "comment": {
+                            "type": "string"
+                        },
                         "name": {
                             "type": "string"
                         },
-                        "type": {
-                            "const": "image",
+                        "path": {
                             "type": "string"
                         }
                     },
                     "required": [
-                        "name",
-                        "type"
+                        "name"
                     ],
                     "type": "object"
                 },
                 {
                     "properties": {
-                        "name": {
-                            "type": "string"
-                        },
                         "type": {
                             "const": "document",
                             "type": "string"
                         }
                     },
                     "required": [
-                        "name",
                         "type"
                     ],
                     "type": "object"
+                }
+            ]
+        },
+        "Files": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/Video"
+                },
+                {
+                    "$ref": "#/definitions/Audio"
+                },
+                {
+                    "$ref": "#/definitions/Image"
+                },
+                {
+                    "$ref": "#/definitions/Document"
                 },
                 {
                     "properties": {
+                        "comment": {
+                            "type": "string"
+                        },
                         "files": {
                             "items": {
                                 "$ref": "#/definitions/Files"
@@ -76,6 +93,15 @@
                             "type": "array"
                         },
                         "name": {
+                            "type": "string"
+                        },
+                        "obstacle": {
+                            "enum": [
+                                "ACCELERATED_MOUSE",
+                                "GLITCHED_MOUSE",
+                                "REVERSED_MOUSE",
+                                "SLOWED_MOUSE"
+                            ],
                             "type": "string"
                         },
                         "type": {
@@ -86,6 +112,72 @@
                     "required": [
                         "files",
                         "name",
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            ]
+        },
+        "Image": {
+            "allOf": [
+                {
+                    "properties": {
+                        "comment": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "properties": {
+                        "type": {
+                            "const": "image",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            ]
+        },
+        "Video": {
+            "allOf": [
+                {
+                    "properties": {
+                        "comment": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "properties": {
+                        "type": {
+                            "const": "video",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
                         "type"
                     ],
                     "type": "object"
@@ -106,4 +198,3 @@
     ],
     "type": "object"
 }
-

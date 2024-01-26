@@ -1,4 +1,15 @@
+/*
+** EPITECH PROJECT, 2023
+** Global-Game-Jam
+** File description:
+** Shape.hpp
+*/
+
+#include <SFML/Graphics.hpp>
+#include <memory>
+
 // Classe de base pour les formes
+
 class Shape {
 public:
     virtual void draw(sf::RenderWindow& window) = 0;

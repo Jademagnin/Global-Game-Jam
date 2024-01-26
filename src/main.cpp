@@ -6,7 +6,7 @@
 */
 
 #include <SFML/Graphics.hpp>
-#include "engine/Engine.hpp"
+#include "Engine.hpp"
 
 int main()
 {

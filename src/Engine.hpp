@@ -11,13 +11,14 @@
 #include <SFML/Graphics.hpp>
     
 class Engine {
-        public:
-            Engine();
-            ~Engine() = default;
-        private:
-            sf::RenderWindow _window;
+    public:
+        Engine();
+        ~Engine() = default;
 
-        
-    };
-    
+        int run();
+    private:
+        sf::RenderWindow _window;
+
+};
+
 #endif /* _ENGINE_HPP_ */

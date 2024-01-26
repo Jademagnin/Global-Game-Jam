@@ -34,7 +34,7 @@
         }
     },
     "properties": {
-        "Window": {
+        "window": {
             "items": {
                 "$ref": "#/definitions/Document"
             },

@@ -9,6 +9,7 @@
 #define _ENGINE_HPP_
 
 #include <SFML/Graphics.hpp>
+#include "../shape/Shape.hpp"
 
 class Engine {
     public:

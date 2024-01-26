@@ -2,55 +2,44 @@
 ** EPITECH PROJECT, 2023
 ** Global-Game-Jam
 ** File description:
-** Shape.hpp
+** Main.cpp
 */
 
 #include <SFML/Graphics.hpp>
-#include <memory>
+#include <iostream>
 
-// Classe de base pour les formes
-
+// Base class for all shapes
 class Shape {
-public:
-    virtual void draw(sf::RenderWindow& window) = 0;
-    virtual ~Shape() {}
+    public:
+        virtual void draw(sf::RenderWindow& window, const sf::Color& color, const sf::Vector2f& position) = 0;
+        virtual ~Shape() {}
 };
 
-// Implémentation de la classe Circle
+// Implementation of Circle
 class Circle : public Shape {
-public:
-    void draw(sf::RenderWindow& window) override {
-        sf::CircleShape circle(50);
-        circle.setFillColor(sf::Color::Red);
-        circle.setPosition(100, 100);
-        window.draw(circle);
-    }
+    public:
+        Circle(float radius) : _radius(radius) {}
+        void draw(sf::RenderWindow& window, const sf::Color& color, const sf::Vector2f& position) override;
+    private:
+        float _radius;
 };
 
-// Implémentation de la classe Rectangle
+// Implementation of Rectangle
 class Rectangle : public Shape {
-public:
-    void draw(sf::RenderWindow& window) override {
-        sf::RectangleShape rectangle(sf::Vector2f(120, 50));
-        rectangle.setFillColor(sf::Color::Blue);
-        rectangle.setPosition(200, 200);
-        window.draw(rectangle);
-    }
+    public:
+        Rectangle(const sf::Vector2f& size) : _size(size) {}
+        void draw(sf::RenderWindow& window, const sf::Color& color, const sf::Vector2f& position) override;
+    private:
+        sf::Vector2f _size;
 };
 
-// Factory pour créer des formes
+// Factory Design to create shapes
 class ShapeFactory {
-public:
-    enum class ShapeType { Circle, Rectangle };
+    public:
+        enum class ShapeType {
+            Circle,
+            Rectangle
+        };
 
-    static std::unique_ptr<Shape> createShape(ShapeType type) {
-        switch (type) {
-            case ShapeType::Circle:
-                return std::make_unique<Circle>();
-            case ShapeType::Rectangle:
-                return std::make_unique<Rectangle>();
-            default:
-                throw std::invalid_argument("Invalid shape type");
-        }
-    }
+        static std::unique_ptr<Shape> createShape(ShapeType type, float size);
 };

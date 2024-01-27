@@ -14,7 +14,7 @@
 
 Engine::Engine()
 {
-    _window.create(sf::VideoMode(1920, 1080), "Global Game Jam");
+    _window.create(sf::VideoMode::getDesktopMode(), "Global Game Jam", sf::Style::Fullscreen);
     _window.setFramerateLimit(60);
     _window.setActive(true);
     _window.setVerticalSyncEnabled(true);

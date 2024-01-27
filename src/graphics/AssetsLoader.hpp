@@ -5,52 +5,79 @@
 ** AssetsLoader
 */
 
-#ifndef ASSETS_LOADER_H_
-#define ASSETS_LOADER_H_
+#ifndef ASSETSLOADER_HPP_
+#define ASSETSLOADER_HPP_
 
-#include <unordered_map>
-#include <vector>
-#include <set>
-
+#include "../engine/Engine.hpp"
+#include <SFML/Graphics.hpp>
+#include <iostream>
 #include <string>
-#include <string_view>
-#include <regex>
-
-#include <algorithm>
 #include <functional>
 #include <filesystem>
 
-namespace fs = std::filesystem;
-
-namespace Loader {
-
 template<typename T>
 class AssetsLoader {
- public:
-  AssetsLoader() = default;
-  ~AssetsLoader() = default;
+public:
+    AssetsLoader(const std::string& filename, const sf::Vector2f& position, const sf::Vector2f& size) {
+        std::string path = findFile(filename);
+        if (path == "") {
+            std::cerr << "Error loading texture from file: " << filename << std::endl;
+            return;
+        }
 
-  AssetsLoader(const AssetsLoader<T> &other) = delete;
-  AssetsLoader &operator=(const AssetsLoader<T> &other) = delete;
+        if (!texture.loadFromFile(path)) {
+            std::cerr << "Error loading texture from file: " << filename << std::endl;
+            return;
+        }
 
-  AssetsLoader(const AssetsLoader<T> &&other) = delete;
-  AssetsLoader &operator=(const AssetsLoader<T> &&other) = delete;
+        sprite.setTexture(texture);
+        sprite.setPosition(position);
+        sprite.setScale(size.x / sprite.getLocalBounds().width, size.y / sprite.getLocalBounds().height);
+    }
 
-  void setSupportedFormats(std::string formats, std::string delim);
 
-  bool loadAssets(std::string_view folderPath,
-                  std::function<void(T &item, const fs::path &itemPath)> loader);
+    void draw(sf::RenderWindow& window) {
+        window.draw(sprite);
+    }
 
-  T *operator[](std::string_view name);
-  T *getPtr(std::string name);
-  const T *getPtr(const std::string_view name) const;
+    void setPosition(const sf::Vector2f& position) {
+        sprite.setPosition(position);
+    }
 
- private:
-  std::set<std::string> m_supportedFormats;
-  std::unordered_map<std::string, T> m_storage;
+    void setSize(const sf::Vector2f& size) {
+        sprite.setScale(size.x / sprite.getLocalBounds().width, size.y / sprite.getLocalBounds().height);
+    }
 
-  bool exists(const fs::path &p, fs::file_status s = fs::file_status{});
+    sf::Vector2f getPosition() {
+        return sprite.getPosition();
+    }
+
+    sf::Vector2f getSize() {
+        return sf::Vector2f(sprite.getLocalBounds().width, sprite.getLocalBounds().height);
+    }
+
+    std::string findFile(const std::string& filename) {
+        std::string path = "";
+        std::string currentPath = std::filesystem::current_path();
+        if (std::filesystem::exists(currentPath + "/" + filename)) {
+            path = currentPath + "/" + filename;
+        } else {
+            std::cout << "file not found" << std::endl;
+            for (const auto& entry : std::filesystem::recursive_directory_iterator(currentPath)) {
+                std::cout << entry.path() << std::endl;
+                if (entry.path().filename() == filename) {
+                    path = entry.path();
+                    break;
+                }
+            }
+        }
+        return path;
+    }
+
+
+private:
+    sf::Texture texture;
+    sf::Sprite sprite;
 };
-}
 
-#endif
+#endif /* !ASSETSLOADER_HPP_ */

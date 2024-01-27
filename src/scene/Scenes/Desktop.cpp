@@ -61,18 +61,15 @@ void Desktop::InitTextBelow()
 
 void Desktop::render(sf::RenderWindow &window)
 {
+     for (int i = 0; i < 21; i++) {
+        _icon[i]->moveFrame();
+    }
     for (int i = 0; i < 21; i++) {
         window.draw(_icon[i]->sprite);
         _text[i]->draw(window);
     }
 }
 
-void Desktop::update(sf::Time deltaTime)
-{
-    for (int i = 0; i < 21; i++) {
-        _icon[i]->moveFrame();
-    }
-}
 
 template<typename... Funcs>
 void Desktop::forEachIcon(Funcs... callbacks)

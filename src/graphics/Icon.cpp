@@ -21,7 +21,7 @@ void Icon::checkHover(sf::Vector2i mousePos)
     float halfWidth = rect.width / 2;
     float halfHeight = rect.height / 2;
     if (mousePos.x >= iconPos.x - halfWidth && mousePos.x <= iconPos.x + halfWidth &&
-        mousePos.y >= iconPos.y - halfHeight && mousePos.y <= iconPos.y + halfHeight + 100) {
+        mousePos.y >= iconPos.y - halfHeight && mousePos.y <= iconPos.y + halfHeight) {
         hover(true);
     } else {
         hover(false);

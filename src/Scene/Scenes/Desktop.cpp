@@ -86,18 +86,20 @@ void Desktop::forEachIcon(Funcs... callbacks)
 
 void Desktop::processEvents(sf::Event event)
 {
+    sf::Vector2i pixelPos = sf::Mouse::getPosition(_window); // window coordinates
+
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         forEachIcon([&](Icon* icon) {
-            icon->checkDrag(sf::Mouse::getPosition(_window), _window);
+            icon->checkDrag(pixelPos, _window);
         });
     } else if (event.type == sf::Event::MouseMoved) {
         forEachIcon([&](Icon* icon) {
-            icon->checkMove(sf::Mouse::getPosition(_window), _window);
-            icon->checkHover(sf::Mouse::getPosition(_window));
+            icon->checkMove(pixelPos, _window);
+            icon->checkHover(pixelPos);
         });
     } else if (event.type == sf::Event::MouseButtonReleased) {
         forEachIcon([&](Icon* icon) {
-            icon->checkDrop(sf::Mouse::getPosition(_window), _window);
+            icon->checkDrop(pixelPos, _window);
         });
     }
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {

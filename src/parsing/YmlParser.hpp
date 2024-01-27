@@ -14,13 +14,14 @@
     class YmlParser {
         public:
             YmlParser();
-            ~YmlParser();
+            ~YmlParser() = default;
             int getNbOfFolderDesktop() const;
             std::vector<std::string> getDesktop() const;
 
         protected:
         private:
             YAML::Node _node;
+            int _NbFldrDesktop;
     };
 
 #endif /* !YMLPARSER_HPP_ */

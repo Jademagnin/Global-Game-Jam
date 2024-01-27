@@ -26,11 +26,11 @@ class Desktop : public Scene {
             void InitTextBelow();
             
         private:
+            YmlParser _yml;
             Icon* _icon[21];
             sf::Vector2f _pos[21];
             sf::RenderWindow &_window;
             Text* _text[21];
-            YmlParser _yml;
 
     };
 

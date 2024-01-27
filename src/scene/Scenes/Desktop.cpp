@@ -21,6 +21,7 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
     files.push_back(std::map<std::string, int>{{"fesses.png", 6}});
     files.push_back(std::map<std::string, int>{{"musique.png", 14}});
     files.push_back(std::map<std::string, int>{{"horreur.png", 8}});
+
     int row = 0;
     int col = 0;
 
@@ -48,8 +49,10 @@ void Desktop::InitTextBelow()
 {
     int row = 0;
     int col = 0;
+    auto folders = this->_yml.getDesktop();
+
     for (int i = 0; i < 21; i++) {
-        _text[i] = new Text("folder", sf::Vector2f(20 + (col * 128), 50 + (row * 128) + 50), 20, sf::Color::White);
+        _text[i] = new Text("folder", sf::Vector2f(20 + (col * 128), 50 + (row * 128) + 50), 15, sf::Color::White);
         row++;
         if (row == 7) {
             row = 0;

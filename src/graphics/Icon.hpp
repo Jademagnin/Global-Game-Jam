@@ -9,13 +9,16 @@
 #define _ICON_HPP_
 
 #include <SFML/Graphics.hpp>
-#include "graphics/Sprite.hpp"
+#include "Sprite.hpp"
 
     
 class Icon : public Sprite {
     public:
         Icon(std::string path);
         ~Icon() = default;
+        void hover(bool hovered);
+    private:
+        bool _hovered;
 };
     
 #endif /* _ICON_HPP_ */

@@ -7,7 +7,7 @@
 
     #include "Sprite.hpp"
     #include <iostream>
-    
+
 
 Sprite::Sprite(std::string path)
 {
@@ -18,6 +18,8 @@ Sprite::Sprite(std::string path)
         exit(84);
     }
     sprite.setTexture(texture);
-    sprite.setScale(0.3, 0.3);
+    sprite.setOrigin(texture.getSize().x / 2, texture.getSize().y / 2);
+    border.setFillColor(sf::Color::Blue);
+    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
+    border.setSize({spriteBounds.width, spriteBounds.height});
 }
-

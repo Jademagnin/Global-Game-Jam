@@ -9,6 +9,7 @@
 #include "../Logging.hpp"
 #include "../Scene/Scenes/WhiteRectangle.hpp"
 #include "../Scene/Scenes/BlackRectangle.hpp"
+#include "../Scene/Scenes/Desktop.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -31,13 +32,11 @@ void Engine::run()
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
     sf::Time TimePerFrame = sf::seconds(1.f/60.f); // 60 fps
-
-    while (_window.isOpen())
-    {
+    _sceneManager.switchScene(std::make_unique<Desktop>(_window));
+    while (_window.isOpen()) {
         sf::Time elapsedTime = clock.restart();
         timeSinceLastUpdate += elapsedTime;
-        while (timeSinceLastUpdate > TimePerFrame)
-        {
+        while (timeSinceLastUpdate > TimePerFrame) {
             timeSinceLastUpdate -= TimePerFrame;
             processEvents();
             update(TimePerFrame);
@@ -59,26 +58,16 @@ void Engine::processEvents()
 
 void Engine::update(sf::Time deltaTime)
 {
-    // Your update logic here...
-    // std::cout << "Update completed successfully.\n";
+    Scene* currentScene = _sceneManager.getCurrentScene();
+    if (currentScene != nullptr)
+        currentScene->update(deltaTime);
 }
 
 void Engine::render()
 {
-    static bool isWhite = true;
     _window.clear();
-
-    if (isWhite) {
-        _sceneManager.switchScene(std::make_unique<WhiteRectangle>());
-    } else {
-        _sceneManager.switchScene(std::make_unique<BlackRectangle>());
-    }
-
     Scene* currentScene = _sceneManager.getCurrentScene();
-    if (currentScene != nullptr) {
+    if (currentScene != nullptr)
         currentScene->render(_window);
-    }
-
     _window.display();
-    isWhite = !isWhite;
 }

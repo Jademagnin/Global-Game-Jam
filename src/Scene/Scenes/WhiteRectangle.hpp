@@ -15,7 +15,6 @@ class WhiteRectangle: public Scene {
         ~WhiteRectangle();
         void update(sf::Time deltaTime);
         void render(sf::RenderWindow &window);
-
     protected:
     private:
 };

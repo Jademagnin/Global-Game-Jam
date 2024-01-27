@@ -117,6 +117,30 @@ desktop:
     name: Promesses au peuple
   - type: folder
     name: Musiques
+    action:
+      open: CHAT_NARRATOR
+      text: "Je suis un grand fan de musique, je vous laisse écouter mes playlists !"
+    files:
+      - type: audio
+        name: "Playlist 1"
+      - type: audio
+        name: "Playlist 2"
+      - type: audio
+        name: "Playlist 3"
+      - type: audio
+        name: "Playlist 4"
+      - type: audio
+        name: "Playlist 5"
+      - type: audio
+        name: "Playlist 6"
+      - type: audio
+        name: "Playlist 7"
+      - type: audio
+        name: "Playlist 8"
+      - type: audio
+        name: "Playlist 9"
+      - type: audio
+        name: "Playlist 10"
   - type: folder
     name: Notes
     files: 

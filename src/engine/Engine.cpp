@@ -6,6 +6,9 @@
 */
 
 #include "Engine.hpp"
+#include "../text/Text.hpp"
+#include "../sound/Sound.hpp"
+#include "../music/Music.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -25,12 +28,20 @@ Engine::~Engine()
 void Engine::run()
 {
     sf::Clock clock;
+    Text text("Hello World !", sf::Vector2f(10, 10), 20, sf::Color::White);
+    Sound sound("content/assets/BoneCrackSound.ogg");
+    Music music("content/assets/Applaud.ogg");
+    // music.play();
+    sound.playSound();
     while (_window.isOpen())
     {
         sf::Time deltaTime = clock.restart();
         processEvents();
         update(deltaTime);
-        render();
+        // render();
+        _window.clear();
+        text.draw(_window);
+        _window.display();
     }
 }
 

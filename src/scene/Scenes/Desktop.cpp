@@ -25,6 +25,7 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
     int row = 0;
     int col = 0;
 
+    setBackGround();
     InitTextBelow();
     for (int i = 0; i < 21; i++) {
         _icon[i] = new Icon(files[i].begin()->first, _text[i], files[i].begin()->second);
@@ -43,6 +44,7 @@ Desktop::~Desktop()
     for (int i = 0; i < 21; i++) {
         delete _icon[i];
     }
+    delete _background;
 }
 
 void Desktop::InitTextBelow()
@@ -61,7 +63,8 @@ void Desktop::InitTextBelow()
 
 void Desktop::render(sf::RenderWindow &window)
 {
-    for (int i = 0; i < 21; i++) {
+    _background->draw(window);
+     for (int i = 0; i < 21; i++) {
         _icon[i]->moveFrame();
     }
     for (int i = 0; i < 21; i++) {
@@ -101,4 +104,9 @@ void Desktop::processEvents(sf::Event event)
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
         std::cout << "Right click" << std::endl;
     }
+}
+
+void Desktop::setBackGround()
+{
+    _background = new AssetsLoader<sf::Sprite>("background.png", sf::Vector2f(0, 0), sf::Vector2f(1920, 1080));
 }

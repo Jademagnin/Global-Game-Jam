@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include "engine/Engine.hpp"
 #include "Logging.hpp"
+#include "graphics/AssetsLoader.hpp"
 
 int main()
 {

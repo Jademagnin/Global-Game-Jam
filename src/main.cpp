@@ -7,10 +7,12 @@
 
 #include <SFML/Graphics.hpp>
 #include "engine/Engine.hpp"
+#include "Logging.hpp"
 
 int main()
 {
     Engine engine;
+    LOG("Engine initialized successfully.\n");
     engine.run();
     return 0;
 }

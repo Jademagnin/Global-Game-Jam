@@ -69,4 +69,8 @@ void Desktop::processEvents(sf::Event event)
             icon->checkDrop(sf::Mouse::getPosition(_window), _window);
         });
     }
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
+        std::cout << "Right click" << std::endl;
+    }
+    
 }

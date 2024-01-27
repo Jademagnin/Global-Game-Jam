@@ -9,4 +9,4 @@ file(GLOB_RECURSE SOURCE_FILES "./src/*.cpp")
 add_executable(jam ${SOURCE_FILES})
 
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
-target_link_libraries(jam sfml-graphics sfml-audio)
+target_link_libraries(jam sfml-graphics sfml-audio yaml-cpp)

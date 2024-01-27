@@ -11,6 +11,8 @@
     #include "../Scene.hpp"
     #include "../../graphics/Icon.hpp"
     #include "../../text/Text.hpp"
+    #include "../../parsing/YmlParser.hpp"
+
     #include <functional>
 
 class Desktop : public Scene {
@@ -28,6 +30,8 @@ class Desktop : public Scene {
             sf::Vector2f _pos[21];
             sf::RenderWindow &_window;
             Text* _text[21];
+            YmlParser _yml;
+
     };
     
 #endif /* _DESKTOP_HPP_ */

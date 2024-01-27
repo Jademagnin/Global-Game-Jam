@@ -8,7 +8,7 @@
 #include "Icon.hpp"
 #include <iostream>
 
-Icon::Icon(std::string path, Text *text) : Sprite(path), _hovered(false), _moving(false), _text(text)
+Icon::Icon(std::string path, Text *text, int n_frames) : Sprite(path, n_frames), _hovered(false), _moving(false), _text(text)
 {
     sprite.setScale(0.2, 0.2);
 }
@@ -17,8 +17,11 @@ void Icon::checkHover(sf::Vector2i mousePos)
 {
     if (_moving) return;
     sf::Vector2f iconPos = sprite.getPosition();
-    if (mousePos.x >= iconPos.x && mousePos.x <= iconPos.x + 100 &&
-        mousePos.y >= iconPos.y && mousePos.y <= iconPos.y + 100) {
+    sf::Rect<float> rect = sprite.getGlobalBounds();
+    float halfWidth = rect.width / 2;
+    float halfHeight = rect.height / 2;
+    if (mousePos.x >= iconPos.x - halfWidth && mousePos.x <= iconPos.x + halfWidth &&
+        mousePos.y >= iconPos.y - halfHeight && mousePos.y <= iconPos.y + halfHeight + 100) {
         hover(true);
     } else {
         hover(false);
@@ -35,7 +38,6 @@ void Icon::checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window)
 void Icon::checkMove(sf::Vector2i mousePos, sf::RenderWindow &window)
 {
     if (_moving) {
-        sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
         sprite.setPosition(mousePos.x, mousePos.y);
         _text->setPosition(sf::Vector2f(mousePos.x - 30, mousePos.y + 50));
     }
@@ -56,7 +58,9 @@ void Icon::hover(bool hovered)
     _hovered = hovered;
     if (_hovered)
         sprite.setScale(0.225, 0.225);
-    else
+    else {
         sprite.setScale(0.2, 0.2);
+        rect.left = 0;
+    }
 }
 

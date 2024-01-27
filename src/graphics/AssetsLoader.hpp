@@ -34,6 +34,8 @@ public:
 
     T getSprite() { return sprite; }
 
+    T getTexture() { return texture; }
+
 private:
     sf::Texture texture;
     sf::Sprite sprite;

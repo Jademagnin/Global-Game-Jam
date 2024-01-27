@@ -5,26 +5,39 @@
 ** Engine.cpp
 */
 
+#include <iostream>
+#include <SFML/Graphics.hpp>
 #include "Engine.hpp"
 #include "../Logging.hpp"
-#include "../Scene/Scenes/WhiteRectangle.hpp"
-#include "../Scene/Scenes/BlackRectangle.hpp"
-#include "../Scene/Scenes/Desktop.hpp"
+#include "../scene/Scenes/WhiteRectangle.hpp"
+#include "../scene/Scenes/BlackRectangle.hpp"
+#include "../scene/Scenes/Desktop.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
 Engine::Engine()
+    : _window(sf::VideoMode::getDesktopMode(), "Global Game Jam", sf::Style::Fullscreen)
 {
-    _window.create(sf::VideoMode::getDesktopMode(), "Global Game Jam", sf::Style::Fullscreen);
     _window.setFramerateLimit(60);
     _window.setActive(true);
     _window.setVerticalSyncEnabled(true);
-    // std::cout << "Engine initialized successfully.\n";
+
+    // init all scenes
+    // Default scene
+    _sceneManager.stageScene(std::make_unique<Desktop>(_window));
+
+    // Secondary scenes
+    _sceneManager.unstageScene(std::make_unique<WhiteRectangle>());
+    _sceneManager.unstageScene(std::make_unique<BlackRectangle>());
+
+    LOG("Engine initialized successfully.");
 }
 
 Engine::~Engine()
 {
-
+    _sceneManager.getStagedScenes().clear();
+    _sceneManager.getUnstagedScenes().clear();
+    LOG("Engine destroyed successfully.");
 }
 
 void Engine::run()
@@ -32,16 +45,13 @@ void Engine::run()
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
     sf::Time TimePerFrame = sf::seconds(1.f/60.f); // 60 fps
-    _sceneManager.switchScene(std::make_unique<Desktop>(_window));
     while (_window.isOpen()) {
         sf::Time elapsedTime = clock.restart();
         timeSinceLastUpdate += elapsedTime;
         while (timeSinceLastUpdate > TimePerFrame) {
             timeSinceLastUpdate -= TimePerFrame;
             processEvents();
-            update(TimePerFrame);
         }
-        update(TimePerFrame);
         render();
     }
 }
@@ -55,25 +65,20 @@ void Engine::processEvents()
             _window.close();
     }
 
-    Scene* currentScene = _sceneManager.getCurrentScene();
-    if (currentScene != nullptr) {
-        currentScene->processEvents(event);
+    // Loop into staged scenes and process events
+    for (auto& scene : _sceneManager.getStagedScenes()) {
+        scene->processEvents(event);
     }
-    // std::cout << "Events processed successfully.\n";
-}
 
-void Engine::update(sf::Time deltaTime)
-{
-    Scene* currentScene = _sceneManager.getCurrentScene();
-    if (currentScene != nullptr)
-        currentScene->update(deltaTime);
 }
 
 void Engine::render()
 {
     _window.clear();
-    Scene* currentScene = _sceneManager.getCurrentScene();
-    if (currentScene != nullptr)
-        currentScene->render(_window);
+
+    for (auto& scene : _sceneManager.getStagedScenes()) {
+        scene->render(_window);
+    }
+
     _window.display();
 }

@@ -14,23 +14,58 @@
 #include <string>
 #include <functional>
 #include <filesystem>
+#include <concepts>
 
 template<typename T>
 class AssetsLoader {
 public:
-    AssetsLoader(const std::string& filename, const sf::Vector2f& position, const sf::Vector2f& size);
+    AssetsLoader(const std::string& filename, const sf::Vector2f& position, const sf::Vector2f& size) {
+        std::string path = findFile(filename);
+        if (!texture.loadFromFile(path)) {
+            std::cout << "Error loading texture" << std::endl;
+        }
+        sprite.setTexture(texture);
+        sprite.setPosition(position);
+        sprite.setScale(size.x / sprite.getLocalBounds().width, size.y / sprite.getLocalBounds().height);
+    }
 
-    void draw(sf::RenderWindow& window);
+    void draw(sf::RenderWindow& window) {
+        window.draw(sprite);
+    }
 
-    void setPosition(const sf::Vector2f& position);
+    void setPosition(const sf::Vector2f& position) {
+        sprite.setPosition(position);
+    }
 
-    void setSize(const sf::Vector2f& size);
+    void setSize(const sf::Vector2f& size) {
+        sprite.setScale(size.x / sprite.getLocalBounds().width, size.y / sprite.getLocalBounds().height);
+    }
 
-    sf::Vector2f getPosition();
+    sf::Vector2f getPosition() {
+        return sprite.getPosition();
+    }
 
-    sf::Vector2f getSize();
+    sf::Vector2f getSize() {
+        return sf::Vector2f(sprite.getLocalBounds().width, sprite.getLocalBounds().height);
+    }
 
-    std::string findFile(const std::string& filename);
+    std::string findFile(const std::string& filename) {
+        std::string path = "";
+        std::string currentPath = std::filesystem::current_path();
+        if (std::filesystem::exists(currentPath + "/" + filename)) {
+            path = currentPath + "/" + filename;
+        } else {
+            std::cout << "file not found" << std::endl;
+            for (const auto& entry : std::filesystem::recursive_directory_iterator(currentPath)) {
+                std::cout << entry.path() << std::endl;
+                if (entry.path().filename() == filename) {
+                    path = entry.path();
+                    break;
+                }
+            }
+        }
+        return path;
+    }
 
     T getSprite() { return sprite; }
 
@@ -38,7 +73,7 @@ public:
 
 private:
     sf::Texture texture;
-    sf::Sprite sprite;
+    T sprite;
 };
 
 #endif /* !ASSETSLOADER_HPP_ */

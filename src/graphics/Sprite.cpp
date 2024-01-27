@@ -9,7 +9,7 @@
     #include <iostream>
 
 
-Sprite::Sprite(std::string path)
+Sprite::Sprite(std::string path, int n_frames)
 {
     std::string root = "assets";
     path = root + (path.starts_with("/") ? path : "/" + path);
@@ -18,8 +18,21 @@ Sprite::Sprite(std::string path)
         exit(84);
     }
     sprite.setTexture(texture);
-    sprite.setOrigin(texture.getSize().x / 2, texture.getSize().y / 2);
-    border.setFillColor(sf::Color::Blue);
-    sf::FloatRect spriteBounds = sprite.getGlobalBounds();
-    border.setSize({spriteBounds.width, spriteBounds.height});
+    std::cout << "texture size: " << texture.getSize().x << ", " << texture.getSize().y << std::endl;
+    rect.height = texture.getSize().y;
+    rect.width = texture.getSize().x / n_frames;
+    std::cout << "rect size: " << rect.width << ", " << rect.height << std::endl;
+    sprite.setTextureRect(rect);
+    sprite.setOrigin(rect.width / 2, rect.height / 2);
+}
+
+void Sprite::moveFrame()
+{
+    if (clock.getElapsedTime().asMilliseconds() < 100)
+        return;
+    rect.left += rect.width;
+    if (rect.left >= texture.getSize().x)
+        rect.left = 0;
+    sprite.setTextureRect(rect);
+    clock.restart();
 }

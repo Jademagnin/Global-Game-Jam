@@ -8,7 +8,7 @@
 #include "Icon.hpp"
 #include <iostream>
 
-Icon::Icon(std::string path) : Sprite(path), _hovered(false), _moving(false)
+Icon::Icon(std::string path, int n_frames) : Sprite(path, n_frames), _hovered(false), _moving(false)
 {
     sprite.setScale(0.2, 0.2);
 }
@@ -54,7 +54,9 @@ void Icon::hover(bool hovered)
     _hovered = hovered;
     if (_hovered)
         sprite.setScale(0.225, 0.225);
-    else
+    else {
         sprite.setScale(0.2, 0.2);
+        rect.left = 0;
+    }
 }
 

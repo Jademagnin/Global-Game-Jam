@@ -14,7 +14,7 @@
     
 class Icon : public Sprite {
     public:
-        Icon(std::string path);
+        Icon(std::string path, int n_frames = 1);
         ~Icon() = default;
         void hover(bool hovered);
 
@@ -22,6 +22,10 @@ class Icon : public Sprite {
         void checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window);
         void checkDrop(sf::Vector2i mousePos, sf::RenderWindow &window);
         void checkMove(sf::Vector2i mousePos, sf::RenderWindow &window);
+        void moveFrame() {
+            if (!_hovered) return;
+            Sprite::moveFrame();
+        }
     private:
         bool _hovered;
         bool _moving;

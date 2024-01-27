@@ -16,12 +16,13 @@ class SceneManager
 {
     public:
         void pushScene(std::unique_ptr<Scene> scene);
-        void popScene();
+        // void popScene();
         void switchScene(std::unique_ptr<Scene> scene);
         Scene* getCurrentScene();
 
     private:
-        std::stack<std::unique_ptr<Scene>> scenes;
+        std::stack<std::unique_ptr<Scene>> _scenes;
+        Scene* _currentScene;
 };
 
 #endif /* !SCENEMANAGER_HPP_ */

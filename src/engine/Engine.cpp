@@ -9,6 +9,7 @@
 #include "../Logging.hpp"
 #include "../Scene/Scenes/WhiteRectangle.hpp"
 #include "../Scene/Scenes/BlackRectangle.hpp"
+#include "../Scene/Scenes/Character.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -42,6 +43,7 @@ void Engine::run()
             processEvents();
             update(TimePerFrame);
         }
+        update(TimePerFrame);
         render();
     }
 }
@@ -59,8 +61,10 @@ void Engine::processEvents()
 
 void Engine::update(sf::Time deltaTime)
 {
-    // Your update logic here...
-    // std::cout << "Update completed successfully.\n";
+    Scene* currentScene = _sceneManager.getCurrentScene();
+    if (currentScene != nullptr) {
+        currentScene->update(deltaTime);
+    }
 }
 
 void Engine::render()

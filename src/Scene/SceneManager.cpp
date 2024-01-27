@@ -7,33 +7,27 @@
 
 #include "SceneManager.hpp"
 
+// void SceneManager::popScene()
+// {
+//     if (!scenes.empty())
+//     {
+//         scenes.pop();
+//     }
+// }
+
 void SceneManager::pushScene(std::unique_ptr<Scene> scene)
 {
-    scenes.push(std::move(scene));
-}
-
-void SceneManager::popScene()
-{
-    if (!scenes.empty())
-    {
-        scenes.pop();
-    }
+    _scenes.push(std::move(scene));
+    _currentScene = _scenes.top().get(); // Update the current scene
 }
 
 void SceneManager::switchScene(std::unique_ptr<Scene> scene)
 {
-    if (!scenes.empty())
-    {
-        popScene();
-    }
-    pushScene(std::move(scene));
+    _scenes.push(std::move(scene));
+    _currentScene = _scenes.top().get(); // Update the current scene
 }
 
 Scene* SceneManager::getCurrentScene()
 {
-    if (scenes.empty())
-    {
-        return nullptr;
-    }
-    return scenes.top().get();
+    return _currentScene;
 }

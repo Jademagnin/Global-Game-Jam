@@ -9,7 +9,6 @@
 #include "../Logging.hpp"
 #include "../Scene/Scenes/WhiteRectangle.hpp"
 #include "../Scene/Scenes/BlackRectangle.hpp"
-#include "../Scene/Scenes/Character.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -55,6 +54,11 @@ void Engine::processEvents()
     {
         if (event.type == sf::Event::Closed)
             _window.close();
+    }
+
+    Scene* currentScene = _sceneManager.getCurrentScene();
+    if (currentScene != nullptr) {
+        currentScene->processEvents(event);
     }
     // std::cout << "Events processed successfully.\n";
 }

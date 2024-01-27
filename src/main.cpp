@@ -5,7 +5,6 @@
 ** Main.cpp
 */
 
-#include <SFML/Graphics.hpp>
 #include "engine/Engine.hpp"
 #include "utils/Logging.hpp"
 

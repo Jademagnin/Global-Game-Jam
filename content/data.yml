@@ -1,21 +1,166 @@
 # yaml-language-server: $schema=./schema.json
+
 desktop:
   - type: folder
-    name: Projet 1
-    files:
+    name: Fourre-tout
+    obstacle: REVERSED_MOUSE
+    action: 
+      open: CHAT_NARRATOR
+      text: Ah, c'est peut-être ici que je l'ai mis ! Je peux continuer tout seul, merci.
+    files: 
+      - type: application
+        name: Spotify
+      - type: folder
+        name: Photos
+        obstacle: ACCELERATED_MOUSE
+        action: 
+          open: CHAT_NARRATOR,
+          text: "Ah, non, c'est pas là !"
+        files:
+          - type: folder
+            name: Top secret
+            action: 
+              open: CHAT_NARRATOR
+              text: "NON NON VRAIMENT ARRÊTE ! PAS CE DOSSIER !!!"
+            files: 
+              - type: image
+                name: nude_sous_la_douche.jpg
+              - type: image
+                name: nude_de_dos.jpg
+          - type: image
+            name: selfie.jpg
+          - type: image
+            name: photo_de_famille.jpg
+          - type: folder
+            name: Vacances
+            files:
+              - type: image
+                name: plage.jpg
+              - type: image
+                name: piscine.jpg
+              - type: image
+                name: montagne.jpg
+          - type: folder
+            name: Copains
+            files:
+              - type: image
+                name: copain1.jpg
+              - type: image
+                name: copain2.jpg
+              - type: image
+                name: copain3.jpg            
       - type: document
-        name: Planning 2020
+        name: CV
       - type: document
-        name: Planning 2020
+        name: Lettre de motivation
+      - type: document
+        name: "Lettre de démission"
+      - type: document
+        name: "Lettre de licenciement"
+      - type: document
+        name: "Lettre de rupture conventionnelle"
+      - type: folder
+        name: Vacances avec Giselle
   - type: folder
-    name: Photo
-    files:
-      - type: image
-        name: Soirée Noël 2024
-      - type: image
-        name: Pot de départ Michel
+    name: Téléchargements
+    action:
+      open: CHAT_NARRATOR
+      text: "... Je préfère ne pas vous dire ce que j'ai téléchargé ici ..."
+    files: 
+      - type: video
+        name: "Vidéo de chatons"
+      - type: video
+        name: "La présidence pour les nuls"
+      - type: document
+        name: "Cours de droit constitutionnel"
+      - type: document
+        name: "Cours de droit administratif"
+      - type: video
+        name: "Combat d'ours"
+      - type: document
+        name: "Cours de droit des contrats"
+      - type: audio
+        name: "Karaoke - La Marseillaise"
+      - type: audio
+        name: "ASMR - Le droit du travail"
+  - type: folder
+    name: Jeux
+    action:
+      open: CHAT_NARRATOR
+      text: "Oui oui, moi aussi, je suis un gamer !"
+    files: 
+      - type: application
+        name: "League of Ministers"
+      - type: application
+        name: "Valorisant"
+      - type: application
+        name: "Parmis nous"
+      - type: application
+        name: "Minecontract"
+      - type: application
+        name: "FIFOU 17"
+      - type: application
+        name: "FIFOU 22"
+  - type: folder
+    name: Corbeille
+    action: 
+    #lorsque le joueur appuie sur la corbeille : la fenêtre "avertissement" apparaît 6 fois à différents endroits du bureau. le joueur doit les fermer en appuyant sur la croix. Tant que ces fenêtres ne sont pas fermés, il ne peut interagir avec rien d'autre.
+      open: WARNING
   - type: folder
     name: Contrats
+  - type: folder
+    name: Assemblés Générales
+  - type: folder
+    name: "49.3"
+  - type: folder
+    name: Ministres
+  - type: folder
+    name: Promesses au peuple
+  - type: folder
+    name: Musiques
+    action:
+      open: CHAT_NARRATOR
+      text: "Je suis un grand fan de musique, je vous laisse écouter mes playlists !"
     files:
+      - type: audio
+        name: "Playlist 1"
+      - type: audio
+        name: "Playlist 2"
+      - type: audio
+        name: "Playlist 3"
+      - type: audio
+        name: "Playlist 4"
+      - type: audio
+        name: "Playlist 5"
+      - type: audio
+        name: "Playlist 6"
+      - type: audio
+        name: "Playlist 7"
+      - type: audio
+        name: "Playlist 8"
+      - type: audio
+        name: "Playlist 9"
+      - type: audio
+        name: "Playlist 10"
+  - type: folder
+    name: Notes
+    files: 
       - type: document
-        name: Gazoduc Arabie Saoudite
+        name: "Notes de réunion"
+      - type: document
+        name: "Blagues"
+      - type: document
+        name: "Disquette pour pécho"
+      - type: document
+        name: "Mots de passe"
+      - type: document
+        name: "Plan drague"
+      - type: document
+        name: "Liste de courses"
+      - type: document
+        name: "Résultats des courses 2025"
+      - type: document
+        name: "Bac 2020"
+action: 
+  open: CHAT_NARRATOR
+  text: Voici mon pc, je souhaiterais que vous trouviez un certain dossier qui doit absolument être supprimé dans les plus bref délais.

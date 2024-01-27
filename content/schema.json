@@ -1,6 +1,39 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
+        "Application": {
+            "allOf": [
+                {
+                    "properties": {
+                        "comment": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "properties": {
+                        "type": {
+                            "const": "application",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            ]
+        },
         "Audio": {
             "allOf": [
                 {
@@ -67,8 +100,11 @@
                 }
             ]
         },
-        "Files": {
+        "FileType": {
             "anyOf": [
+                {
+                    "$ref": "#/definitions/Application"
+                },
                 {
                     "$ref": "#/definitions/Video"
                 },
@@ -83,12 +119,58 @@
                 },
                 {
                     "properties": {
+                        "action": {
+                            "anyOf": [
+                                {
+                                    "properties": {
+                                        "open": {
+                                            "const": "WARNING",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "open"
+                                    ],
+                                    "type": "object"
+                                },
+                                {
+                                    "properties": {
+                                        "open": {
+                                            "const": "CHAT_NARRATOR",
+                                            "type": "string"
+                                        },
+                                        "text": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "open",
+                                        "text"
+                                    ],
+                                    "type": "object"
+                                }
+                            ]
+                        },
                         "comment": {
                             "type": "string"
                         },
                         "files": {
                             "items": {
-                                "$ref": "#/definitions/Files"
+                                "properties": {
+                                    "comment": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "path": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name"
+                                ],
+                                "type": "object"
                             },
                             "type": "array"
                         },
@@ -110,7 +192,6 @@
                         }
                     },
                     "required": [
-                        "files",
                         "name",
                         "type"
                     ],
@@ -186,15 +267,33 @@
         }
     },
     "properties": {
+        "action": {
+            "properties": {
+                "open": {
+                    "const": "CHAT_NARRATOR",
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "open",
+                "text"
+            ],
+            "type": "object"
+        },
         "desktop": {
             "items": {
-                "$ref": "#/definitions/Files"
+                "$ref": "#/definitions/FileType"
             },
             "type": "array"
         }
     },
     "required": [
+        "action",
         "desktop"
     ],
     "type": "object"
 }
+

@@ -14,7 +14,7 @@
 
 class Text {
     public:
-        Text(const std::string& string, const sf::Vector2f& position, int fontSize = 20, const sf::Color& color = sf::Color::Black, const std::string& path = "content/assets/Aileron-SemiBold.ttf")
+        Text(const std::string& string, const sf::Vector2f& position, int fontSize = 20, const sf::Color& color = sf::Color::Black, const std::string& path = "assets/Aileron-SemiBold.ttf")
             : _string(string), _position(position), _fontSize(fontSize), _color(color) {
 
             if (!_font.loadFromFile(path)) {
@@ -29,6 +29,7 @@ class Text {
 
         void draw(sf::RenderWindow& window) const;
         void changeFont(std::string& newPath);
+        void setPosition(const sf::Vector2f& position) { _text.setPosition(position); }
 
     private:
         sf::Font _font;

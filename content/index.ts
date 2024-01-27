@@ -24,17 +24,28 @@ type Document = File & {
     type: 'document'
 }
 
+
+type ActionOpenWarnings = {
+    open: 'WARNING'
+}
+
+type ActionOpenChatNarrator = {
+    open: 'CHAT_NARRATOR'
+    text: string
+}
+
 type Folder = {
     type: 'folder'
     name: string
-    files?: Files[]
+    files?: File[]
     obstacle?: 'REVERSED_MOUSE' | 'ACCELERATED_MOUSE' | 'SLOWED_MOUSE' | 'GLITCHED_MOUSE'
     comment?: string
-    action?: 'OPEN_WARNING'
+    action?: ActionOpenWarnings | ActionOpenChatNarrator
 }
 
-type Files = Folder | Document | Video | Audio | Image | Application
+type FileType = Folder | Document | Video | Audio | Image | Application
 
 export type Schema = {
-    desktop: Files[]
+    desktop: FileType[]
+    action: ActionOpenChatNarrator
 }

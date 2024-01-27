@@ -100,7 +100,7 @@
                 }
             ]
         },
-        "Files": {
+        "FileType": {
             "anyOf": [
                 {
                     "$ref": "#/definitions/Application"
@@ -120,15 +120,57 @@
                 {
                     "properties": {
                         "action": {
-                            "const": "OPEN_WARNING",
-                            "type": "string"
+                            "anyOf": [
+                                {
+                                    "properties": {
+                                        "open": {
+                                            "const": "WARNING",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "open"
+                                    ],
+                                    "type": "object"
+                                },
+                                {
+                                    "properties": {
+                                        "open": {
+                                            "const": "CHAT_NARRATOR",
+                                            "type": "string"
+                                        },
+                                        "text": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "open",
+                                        "text"
+                                    ],
+                                    "type": "object"
+                                }
+                            ]
                         },
                         "comment": {
                             "type": "string"
                         },
                         "files": {
                             "items": {
-                                "$ref": "#/definitions/Files"
+                                "properties": {
+                                    "comment": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "path": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "name"
+                                ],
+                                "type": "object"
                             },
                             "type": "array"
                         },
@@ -225,14 +267,31 @@
         }
     },
     "properties": {
+        "action": {
+            "properties": {
+                "open": {
+                    "const": "CHAT_NARRATOR",
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "open",
+                "text"
+            ],
+            "type": "object"
+        },
         "desktop": {
             "items": {
-                "$ref": "#/definitions/Files"
+                "$ref": "#/definitions/FileType"
             },
             "type": "array"
         }
     },
     "required": [
+        "action",
         "desktop"
     ],
     "type": "object"

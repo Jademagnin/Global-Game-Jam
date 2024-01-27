@@ -2,16 +2,25 @@
 desktop:
   - type: folder
     name: Fourre-tout
+    obstacle: REVERSED_MOUSE
+    action: 
+      open: CHAT_NARRATOR
+      text: Ah, c'est peut-être ici que je l'ai mis ! Je peux continuer tout seul, merci.
     files: 
       - type: application
         name: Spotify
       - type: folder
         name: Photos
-        obstacle: REVERSED_MOUSE
+        obstacle: ACCELERATED_MOUSE
+        action: 
+          open: CHAT_NARRATOR,
+          text: "Ah, non, c'est pas là !"
         files:
           - type: folder
             name: Top secret
-            obstacle: ACCELERATED_MOUSE
+            action: 
+              open: CHAT_NARRATOR
+              text: "NON NON VRAIMENT ARRÊTE ! PAS CE DOSSIER !!!"
             files: 
               - type: image
                 name: nude_sous_la_douche.jpg
@@ -53,6 +62,9 @@ desktop:
         name: Vacances avec Giselle
   - type: folder
     name: Téléchargements
+    action:
+      open: CHAT_NARRATOR
+      text: "... Je préfère ne pas vous dire ce que j'ai téléchargé ici ..."
     files: 
       - type: video
         name: "Vidéo de chatons"
@@ -72,6 +84,9 @@ desktop:
         name: "ASMR - Le droit du travail"
   - type: folder
     name: Jeux
+    action:
+      open: CHAT_NARRATOR
+      text: "Oui oui, moi aussi, je suis un gamer !"
     files: 
       - type: application
         name: "League of Ministers"
@@ -87,7 +102,9 @@ desktop:
         name: "FIFOU 22"
   - type: folder
     name: Corbeille
-    action: OPEN_WARNING
+    action: {
+     open: WARNING
+    }
   - type: folder
     name: Contrats
   - type: folder
@@ -119,3 +136,6 @@ desktop:
         name: "Résultats des courses 2025"
       - type: document
         name: "Bac 2020"
+action: 
+  open: CHAT_NARRATOR
+  text: Voici mon pc, je souhaiterais que vous trouviez un certain dossier qui doit absolument être supprimé dans les plus bref délais.

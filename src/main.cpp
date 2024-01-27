@@ -7,11 +7,12 @@
 
 #include <SFML/Graphics.hpp>
 #include "engine/Engine.hpp"
-#include "Logging.hpp"
+#include "utils/Logging.hpp"
 
 int main()
 {
     Engine engine;
+    LOG("feur.\n");
     engine.run();
     return 0;
 }

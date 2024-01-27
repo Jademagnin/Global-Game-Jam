@@ -8,7 +8,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Engine.hpp"
-#include "../Logging.hpp"
+#include "../utils/Logging.hpp"
 #include "../scene/Scenes/WhiteRectangle.hpp"
 #include "../scene/Scenes/BlackRectangle.hpp"
 #include "../scene/Scenes/Desktop.hpp"

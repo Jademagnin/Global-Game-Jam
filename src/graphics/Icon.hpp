@@ -15,15 +15,17 @@
     
 class Icon : public Sprite {
     public:
-        Icon(std::string path, Text *text);
+        Icon(std::string path, Text *text, int n_frames = 1);
         ~Icon() = default;
         void hover(bool hovered);
-
         void checkHover(sf::Vector2i mousePos);
         void checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window);
         void checkDrop(sf::Vector2i mousePos, sf::RenderWindow &window);
         void checkMove(sf::Vector2i mousePos, sf::RenderWindow &window);
-
+        void moveFrame() {
+            if (_hovered)
+                Sprite::moveFrame();
+        }
     private:
         bool _hovered;
         bool _moving;

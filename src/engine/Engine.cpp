@@ -5,13 +5,13 @@
 ** Engine.cpp
 */
 
+#include <iostream>
+#include <SFML/Graphics.hpp>
 #include "Engine.hpp"
 #include "../Logging.hpp"
 #include "../Scene/Scenes/WhiteRectangle.hpp"
 #include "../Scene/Scenes/BlackRectangle.hpp"
 #include "../Scene/Scenes/Desktop.hpp"
-#include <SFML/Graphics.hpp>
-#include <iostream>
 
 Engine::Engine()
 {

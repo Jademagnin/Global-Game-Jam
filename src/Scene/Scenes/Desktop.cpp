@@ -7,15 +7,27 @@
 
 #include "Desktop.hpp"
 #include <iostream>
+#include <vector>
+#include <map>
 
 Desktop::Desktop(sf::RenderWindow &window) : _window(window)
 {
+    //string is the name of the file, int is the number of frames
+    std::vector<std::map<std::string, int>> files;
+    for (int i = 0; i < 16; i++)
+        files.push_back(std::map<std::string, int>{{"folder.png", 1}});
+    files.push_back(std::map<std::string, int>{{"download.png", 8}});
+    files.push_back(std::map<std::string, int>{{"random.png", 10}});
+    files.push_back(std::map<std::string, int>{{"fesses.png", 6}});
+    files.push_back(std::map<std::string, int>{{"musique.png", 14}});
+    files.push_back(std::map<std::string, int>{{"horreur.png", 8}});
+
     int row = 0;
     int col = 0;
 
     InitTextBelow();
     for (int i = 0; i < 21; i++) {
-        _icon[i] = new Icon("folder.png", _text[i]);
+        _icon[i] = new Icon(files[i].begin()->first, _text[i], files[i].begin()->second);
         _pos[i] = sf::Vector2f(50 + (col * 128), 50 + (row * 128));
         _icon[i]->sprite.setPosition(_pos[i]);
         row++;
@@ -37,8 +49,10 @@ void Desktop::InitTextBelow()
 {
     int row = 0;
     int col = 0;
+    auto folders = this->_yml.getDesktop();
+
     for (int i = 0; i < 21; i++) {
-        _text[i] = new Text("folder", sf::Vector2f(20 + (col * 128), 50 + (row * 128) + 50), 20, sf::Color::White);
+        _text[i] = new Text("folder", sf::Vector2f(20 + (col * 128), 50 + (row * 128) + 50), 15, sf::Color::White);
         row++;
         if (row == 7) {
             row = 0;
@@ -58,6 +72,9 @@ void Desktop::render(sf::RenderWindow &window)
 
 void Desktop::update(sf::Time deltaTime)
 {
+    for (int i = 0; i < 21; i++) {
+        _icon[i]->moveFrame();
+    }
 }
 
 template<typename... Funcs>

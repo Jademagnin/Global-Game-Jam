@@ -26,7 +26,7 @@ class Engine {
         sf::Clock _clock;
         sf::Time _timeSinceLastUpdate;
         sf::Time _timePerFrame;
-        SceneManager _sceneManager = UniqueSceneManager::getInstance();
+        SceneManager& _sceneManager = SceneManager::getInstance();
 
 };
 

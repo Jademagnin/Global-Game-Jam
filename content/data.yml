@@ -14,7 +14,7 @@ desktop:
         name: Photos
         obstacle: ACCELERATED_MOUSE
         action: 
-          open: CHAT_NARRATOR,
+          open: CHAT_NARRATOR
           text: "Ah, non, c'est pas là !"
         files:
           - type: folder

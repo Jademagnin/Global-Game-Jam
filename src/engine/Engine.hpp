@@ -10,6 +10,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "../shape/Shape.hpp"
+#include "../Scene/SceneManager.hpp"
 
 class Engine {
     public:
@@ -21,18 +22,12 @@ class Engine {
         void update(sf::Time deltaTime);
         void render();
 
-        class SceneManager {
-            public:
-                SceneManager();
-                ~SceneManager();
-
-            protected:
-            private:
-        };
-
     private:
         sf::RenderWindow _window;
-
+        sf::Clock _clock;
+        sf::Time _timeSinceLastUpdate;
+        sf::Time _timePerFrame;
+        SceneManager _sceneManager;
 
 };
 

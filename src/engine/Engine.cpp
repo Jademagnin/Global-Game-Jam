@@ -6,6 +6,9 @@
 */
 
 #include "Engine.hpp"
+#include "../Logging.hpp"
+#include "../Scene/Scenes/WhiteRectangle.hpp"
+#include "../Scene/Scenes/BlackRectangle.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -20,16 +23,25 @@ Engine::Engine()
 
 Engine::~Engine()
 {
+
 }
 
 void Engine::run()
 {
     sf::Clock clock;
+    sf::Time timeSinceLastUpdate = sf::Time::Zero;
+    sf::Time TimePerFrame = sf::seconds(1.f/60.f); // 60 fps
+
     while (_window.isOpen())
     {
-        sf::Time deltaTime = clock.restart();
-        processEvents();
-        update(deltaTime);
+        sf::Time elapsedTime = clock.restart();
+        timeSinceLastUpdate += elapsedTime;
+        while (timeSinceLastUpdate > TimePerFrame)
+        {
+            timeSinceLastUpdate -= TimePerFrame;
+            processEvents();
+            update(TimePerFrame);
+        }
         render();
     }
 }
@@ -53,10 +65,20 @@ void Engine::update(sf::Time deltaTime)
 
 void Engine::render()
 {
+    static bool isWhite = true;
     _window.clear();
-    // _sceneManager.render(_window);
-    // start a simple black background
-    sf::RectangleShape background(sf::Vector2f(1920, 1080));
+
+    if (isWhite) {
+        _sceneManager.switchScene(std::make_unique<WhiteRectangle>());
+    } else {
+        _sceneManager.switchScene(std::make_unique<BlackRectangle>());
+    }
+
+    Scene* currentScene = _sceneManager.getCurrentScene();
+    if (currentScene != nullptr) {
+        currentScene->render(_window);
+    }
+
     _window.display();
-    // std::cout << "Render completed successfully.\n";
+    isWhite = !isWhite;
 }

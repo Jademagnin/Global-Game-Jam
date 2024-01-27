@@ -19,7 +19,6 @@ class Desktop : public Scene {
         public:
             Desktop(sf::RenderWindow &window);
             ~Desktop();
-            void update(sf::Time deltaTime);
             void render(sf::RenderWindow &window);
             void processEvents(sf::Event event);
             template<typename... Funcs>
@@ -33,5 +32,5 @@ class Desktop : public Scene {
             YmlParser _yml;
 
     };
-    
+
 #endif /* _DESKTOP_HPP_ */

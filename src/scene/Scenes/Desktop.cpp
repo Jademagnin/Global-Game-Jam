@@ -114,15 +114,6 @@ void Desktop::processEvents(sf::Event event)
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         if (pixelPos.x >= 1800 && pixelPos.x <= 1880 && pixelPos.y >= 995 && pixelPos.y <= 1075)
         {
-            // sf::SoundBuffer buffer;
-            // buffer.loadFromFile("assets/music/scream.ogg");
-            // if (!buffer.loadFromFile("assets/music/scream.ogg"))
-            //     std::cout << "Error" << std::endl;
-            // sf::Sound sound;
-            // sound.setBuffer(buffer);
-            // sound.play();
-            //add delay
-            // sf::sleep(sf::milliseconds(2000));
             Sound sound("assets/music/scream.ogg", 50, 2000);
             sound.playSound();
             std::cout << "Volume" << std::endl;

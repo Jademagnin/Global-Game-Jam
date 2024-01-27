@@ -22,11 +22,12 @@ class Desktop : public Scene {
             void processEvents(sf::Event event);
             template<typename... Funcs>
             void forEachIcon(Funcs... callbacks);
+            void InitTextBelow();
         private:
             Icon* _icon[21];
             sf::Vector2f _pos[21];
             sf::RenderWindow &_window;
-            Text _text[21];
+            Text* _text[21];
     };
     
 #endif /* _DESKTOP_HPP_ */

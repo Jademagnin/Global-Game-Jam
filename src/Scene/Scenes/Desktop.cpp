@@ -22,7 +22,7 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
             col++;
         }
     }
-    for
+    InitTextBelow();
 }
 
 Desktop::~Desktop()
@@ -32,11 +32,26 @@ Desktop::~Desktop()
     }
 }
 
+void Desktop::InitTextBelow()
+{
+    int row = 0;
+    int col = 0;
+    for (int i = 0; i < 21; i++) {
+        _text[i] = new Text("folder", sf::Vector2f(20 + (col * 128), 50 + (row * 128) + 50), 20, sf::Color::White);
+        row++;
+        if (row == 7) {
+            row = 0;
+            col++;
+        }
+    }
+}
+
 
 void Desktop::render(sf::RenderWindow &window)
 {
     for (int i = 0; i < 21; i++) {
         window.draw(_icon[i]->sprite);
+        _text[i]->draw(window);
     }
 }
 

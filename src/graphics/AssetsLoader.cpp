@@ -7,69 +7,64 @@
 
 #include "AssetsLoader.hpp"
 
-namespace Loader {
-
 template<typename T>
-void AssetsLoader<T>::setSupportedFormats(std::string formats, std::string delim) {
-  std::regex regex(delim);
-  std::vector<std::string>
-      lst(std::sregex_token_iterator(std::begin(formats), std::end(formats), regex, -1), std::sregex_token_iterator());
-
-  for (auto &&format: lst)
-    if (!format.empty())
-      m_supportedFormats.emplace("." + format);
-}
-
-template<typename T>
-bool AssetsLoader<T>::loadAssets(std::string_view folderPath,
-                                 std::function<void(T &, const std::filesystem::path &)> loader) {
-
-  if (!exists(folderPath))
-    return false;
-
-  if (loader==nullptr)
-    return false;
-
-  fs::recursive_directory_iterator begin(folderPath, std::filesystem::directory_options::skip_permission_denied);
-  fs::recursive_directory_iterator end;
-
-  std::vector<fs::path> pathFiles;
-  std::copy(begin, end, std::back_inserter(pathFiles));
-
-  for (const auto &path: pathFiles) {
-    const auto &extension = path.extension().string();
-    if (auto search = m_supportedFormats.find(extension); search!=std::end(m_supportedFormats)) {
-      auto nameFile = path.stem().string();
-      auto &ref = m_storage[nameFile];
-      loader(ref, path);
+AssetsLoader<T>::AssetsLoader(const std::string& filename, const sf::Vector2f& position, const sf::Vector2f& size) {
+    std::string path = findFile(filename);
+    if (path == "") {
+        std::cerr << "Error loading texture from file: " << filename << std::endl;
+        return;
     }
-  }
-  return true;
+
+    if (!texture.loadFromFile(path)) {
+        std::cerr << "Error loading texture from file: " << filename << std::endl;
+        return;
+    }
+
+    sprite.setTexture(texture);
+    sprite.setPosition(position);
+    sprite.setScale(size.x / sprite.getLocalBounds().width, size.y / sprite.getLocalBounds().height);
 }
 
 template<typename T>
-T *AssetsLoader<T>::operator[](std::string_view name) {
-  return getPtr(name);
+void AssetsLoader<T>::draw(sf::RenderWindow& window) {
+    window.draw(sprite);
 }
 
 template<typename T>
-const T *AssetsLoader<T>::getPtr(const std::string_view name) const {
-  int *const result = getPtr(name);
-  return result;
+void AssetsLoader<T>::setPosition(const sf::Vector2f& position) {
+    sprite.setPosition(position);
 }
 
 template<typename T>
-T *AssetsLoader<T>::getPtr(std::string name) {
-  if (auto res = m_storage.find(name); res!=std::end(m_storage))
-    return &m_storage[name];
-  return nullptr;
+void AssetsLoader<T>::setSize(const sf::Vector2f& size) {
+    sprite.setScale(size.x / sprite.getLocalBounds().width, size.y / sprite.getLocalBounds().height);
 }
 
 template<typename T>
-bool AssetsLoader<T>::exists(const fs::path &p, fs::file_status s) {
-  if (fs::status_known(s) ? fs::exists(s) : fs::exists(p))
-    return true;
-  else
-    return false;
+sf::Vector2f AssetsLoader<T>::getPosition() {
+    return sprite.getPosition();
 }
+
+template<typename T>
+sf::Vector2f AssetsLoader<T>::getSize() {
+    return sf::Vector2f(sprite.getLocalBounds().width, sprite.getLocalBounds().height);
+}
+
+template<typename T>
+std::string AssetsLoader<T>::findFile(const std::string& filename) {
+    std::string path = "";
+    std::string currentPath = std::filesystem::current_path();
+    if (std::filesystem::exists(currentPath + "/" + filename)) {
+        path = currentPath + "/" + filename;
+    } else {
+        std::cout << "file not found" << std::endl;
+        for (const auto& entry : std::filesystem::recursive_directory_iterator(currentPath)) {
+            std::cout << entry.path() << std::endl;
+            if (entry.path().filename() == filename) {
+                path = entry.path();
+                break;
+            }
+        }
+    }
+    return path;
 }

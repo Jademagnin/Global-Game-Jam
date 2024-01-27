@@ -5,52 +5,38 @@
 ** AssetsLoader
 */
 
-#ifndef ASSETS_LOADER_H_
-#define ASSETS_LOADER_H_
+#ifndef ASSETSLOADER_HPP_
+#define ASSETSLOADER_HPP_
 
-#include <unordered_map>
-#include <vector>
-#include <set>
-
+#include "../engine/Engine.hpp"
+#include <SFML/Graphics.hpp>
+#include <iostream>
 #include <string>
-#include <string_view>
-#include <regex>
-
-#include <algorithm>
 #include <functional>
 #include <filesystem>
 
-namespace fs = std::filesystem;
-
-namespace Loader {
-
 template<typename T>
 class AssetsLoader {
- public:
-  AssetsLoader() = default;
-  ~AssetsLoader() = default;
+public:
+    AssetsLoader(const std::string& filename, const sf::Vector2f& position, const sf::Vector2f& size);
 
-  AssetsLoader(const AssetsLoader<T> &other) = delete;
-  AssetsLoader &operator=(const AssetsLoader<T> &other) = delete;
+    void draw(sf::RenderWindow& window);
 
-  AssetsLoader(const AssetsLoader<T> &&other) = delete;
-  AssetsLoader &operator=(const AssetsLoader<T> &&other) = delete;
+    void setPosition(const sf::Vector2f& position);
 
-  void setSupportedFormats(std::string formats, std::string delim);
+    void setSize(const sf::Vector2f& size);
 
-  bool loadAssets(std::string_view folderPath,
-                  std::function<void(T &item, const fs::path &itemPath)> loader);
+    sf::Vector2f getPosition();
 
-  T *operator[](std::string_view name);
-  T *getPtr(std::string name);
-  const T *getPtr(const std::string_view name) const;
+    sf::Vector2f getSize();
 
- private:
-  std::set<std::string> m_supportedFormats;
-  std::unordered_map<std::string, T> m_storage;
+    std::string findFile(const std::string& filename);
 
-  bool exists(const fs::path &p, fs::file_status s = fs::file_status{});
+    T getSprite() { return sprite; }
+
+private:
+    sf::Texture texture;
+    sf::Sprite sprite;
 };
-}
 
-#endif
+#endif /* !ASSETSLOADER_HPP_ */

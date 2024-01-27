@@ -17,11 +17,11 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
     std::vector<std::map<std::string, int>> files;
     for (int i = 0; i < 16; i++)
         files.push_back(std::map<std::string, int>{{"folder.png", 1}});
-    files.push_back(std::map<std::string, int>{{"download.png", 8}});
-    files.push_back(std::map<std::string, int>{{"random.png", 10}});
-    files.push_back(std::map<std::string, int>{{"fesses.png", 6}});
-    files.push_back(std::map<std::string, int>{{"musique.png", 14}});
-    files.push_back(std::map<std::string, int>{{"horreur.png", 8}});
+    files.push_back(std::map<std::string, int>{{"download/download_sheet.png", 8}});
+    files.push_back(std::map<std::string, int>{{"random/random_sheet.png", 10}});
+    files.push_back(std::map<std::string, int>{{"cheeks/cheek_sheet.png", 6}});
+    files.push_back(std::map<std::string, int>{{"music/spritesheet.png", 14}});
+    files.push_back(std::map<std::string, int>{{"horror/horror_sheet.png", 8}});
     int row = 0;
     int col = 0;
 

@@ -9,7 +9,6 @@
 
 // black rectangle scene for scene manager
 #include "../Scene.hpp"
-#include "../../graphics/AssetsLoader.hpp"
 
 class BlackRectangle: public Scene {
     public:
@@ -21,5 +20,4 @@ class BlackRectangle: public Scene {
     protected:
     private:
         sf::RectangleShape _rectangle;
-        AssetsLoader<sf::Sprite> *_assetsLoader;
 };

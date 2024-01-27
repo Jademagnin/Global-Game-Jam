@@ -41,14 +41,32 @@ void Desktop::render(sf::RenderWindow &window)
 
 void Desktop::update(sf::Time deltaTime)
 {
-    sf::Vector2i mousePos = sf::Mouse::getPosition(_window);
+}
+
+template<typename... Funcs>
+void Desktop::forEachIcon(Funcs... callbacks)
+{
     for (int i = 0; i < 21; i++) {
-        sf::Vector2f iconPos = _icon[i]->sprite.getPosition();
-        if (mousePos.x >= iconPos.x && mousePos.x <= iconPos.x + 100 &&
-            mousePos.y >= iconPos.y && mousePos.y <= iconPos.y + 100) {
-            _icon[i]->hover(true);
-        } else {
-            _icon[i]->hover(false);
-        }
+        ([&](auto callback) { callback(_icon[i]); }(callbacks), ...);
+    } 
+    //when we wrote this, only god and we knew what it was
+    //now, only god knows
+}
+
+void Desktop::processEvents(sf::Event event)
+{
+    if (event.type == sf::Event::MouseButtonPressed) {
+        forEachIcon([&](Icon* icon) {
+            icon->checkDrag(sf::Mouse::getPosition(_window), _window);
+        });
+    } else if (event.type == sf::Event::MouseMoved) {
+        forEachIcon([&](Icon* icon) {
+            icon->checkMove(sf::Mouse::getPosition(_window), _window);
+            icon->checkHover(sf::Mouse::getPosition(_window));
+        });
+    } else if (event.type == sf::Event::MouseButtonReleased) {
+        forEachIcon([&](Icon* icon) {
+            icon->checkDrop(sf::Mouse::getPosition(_window), _window);
+        });
     }
 }

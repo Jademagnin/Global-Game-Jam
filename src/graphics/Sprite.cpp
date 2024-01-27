@@ -11,7 +11,7 @@
 
 Sprite::Sprite(std::string path)
 {
-    std::string root = "./content/assets";
+    std::string root = "assets";
     path = root + (path.starts_with("/") ? path : "/" + path);
     if (!texture.loadFromFile(path)) {
         std::cerr << "Error: could not load texture from file " << path << std::endl;

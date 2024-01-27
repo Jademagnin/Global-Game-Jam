@@ -9,7 +9,7 @@
 #define _ICON_HPP_
 
 #include <SFML/Graphics.hpp>
-#include "graphics/Sprite.hpp"
+#include "Sprite.hpp"
 
     
 class Icon : public Sprite {

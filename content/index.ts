@@ -4,6 +4,10 @@ type File = {
     comment?: string
 }
 
+type Application = File & {
+    type: 'application'
+}
+
 type Video = File & {
     type: 'video'
 }
@@ -23,12 +27,13 @@ type Document = File & {
 type Folder = {
     type: 'folder'
     name: string
-    files: Files[]
+    files?: Files[]
     obstacle?: 'REVERSED_MOUSE' | 'ACCELERATED_MOUSE' | 'SLOWED_MOUSE' | 'GLITCHED_MOUSE'
     comment?: string
+    action?: 'OPEN_WARNING'
 }
 
-type Files = Folder | Document | Video | Audio | Image
+type Files = Folder | Document | Video | Audio | Image | Application
 
 export type Schema = {
     desktop: Files[]

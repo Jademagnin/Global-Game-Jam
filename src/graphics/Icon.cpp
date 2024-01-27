@@ -7,9 +7,12 @@
 
 #include "Icon.hpp"
 #include <iostream>
+#include "../text/Text.hpp"
 
-Icon::Icon(std::string path, Text *text, int n_frames) : Sprite(path, n_frames), _hovered(false), _moving(false), _text(text)
+Icon::Icon(std::string path, const std::string label, int n_frames) : Sprite(path, n_frames), _hovered(false), _moving(false)
 {
+    _text = new Text(label, sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + 50), 15, sf::Color::White);
+    _text->setPosition(sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + 50));
     sprite.setScale(0.2, 0.2);
 }
 
@@ -40,8 +43,7 @@ void Icon::checkMove(sf::Vector2i mousePos, sf::RenderWindow &window)
 {
     (void)window;
     if (_moving) {
-        sprite.setPosition(mousePos.x, mousePos.y);
-        _text->setPosition(sf::Vector2f(mousePos.x - 30, mousePos.y + 50));
+        this->setPosition(window.mapPixelToCoords(mousePos));
     }
 }
 
@@ -49,8 +51,7 @@ void Icon::checkDrop(sf::Vector2i mousePos, sf::RenderWindow &window)
 {
     (void)window;
     if (_moving) {
-        sprite.setPosition(mousePos.x, mousePos.y);
-        _text->setPosition(sf::Vector2f(mousePos.x - 30, mousePos.y + 50));
+        this->setPosition(window.mapPixelToCoords(mousePos));
         _moving = false;
     }
 }

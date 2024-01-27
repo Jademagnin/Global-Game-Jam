@@ -28,10 +28,10 @@
 
         private:
             YmlParser _yml;
-            Icon* _icon[21];
-            sf::Vector2f _pos[21];
+            Icon** _icon;
+            sf::Vector2f *_pos;
             sf::RenderWindow &_window;
-            Text* _text[21];
+            int _folderNumber;
             SceneManager& _sceneManager = SceneManager::getInstance();
     };
 

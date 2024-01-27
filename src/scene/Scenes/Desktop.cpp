@@ -6,6 +6,7 @@
 */
 
 #include "Desktop.hpp"
+#include "WhiteRectangle.hpp"
 #include <iostream>
 #include <vector>
 #include <map>
@@ -61,19 +62,14 @@ void Desktop::InitTextBelow()
     }
 }
 
-
 void Desktop::render(sf::RenderWindow &window)
 {
     for (int i = 0; i < 21; i++) {
+        _icon[i]->moveFrame();
+    }
+    for (int i = 0; i < 21; i++) {
         window.draw(_icon[i]->sprite);
         _text[i]->draw(window);
-    }
-}
-
-void Desktop::update(sf::Time deltaTime)
-{
-    for (int i = 0; i < 21; i++) {
-        _icon[i]->moveFrame();
     }
 }
 
@@ -108,5 +104,4 @@ void Desktop::processEvents(sf::Event event)
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
         std::cout << "Right click" << std::endl;
     }
-    
 }

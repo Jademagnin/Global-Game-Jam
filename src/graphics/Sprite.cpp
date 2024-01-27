@@ -31,7 +31,7 @@ void Sprite::moveFrame()
     if (clock.getElapsedTime().asMilliseconds() < 100)
         return;
     rect.left += rect.width;
-    if (rect.left >= texture.getSize().x)
+    if ((unsigned int) rect.left >= texture.getSize().x)
         rect.left = 0;
     sprite.setTextureRect(rect);
     clock.restart();

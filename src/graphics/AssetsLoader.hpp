@@ -18,62 +18,19 @@
 template<typename T>
 class AssetsLoader {
 public:
-    AssetsLoader(const std::string& filename, const sf::Vector2f& position, const sf::Vector2f& size) {
-        std::string path = findFile(filename);
-        if (path == "") {
-            std::cerr << "Error loading texture from file: " << filename << std::endl;
-            return;
-        }
+    AssetsLoader(const std::string& filename, const sf::Vector2f& position, const sf::Vector2f& size);
 
-        if (!texture.loadFromFile(path)) {
-            std::cerr << "Error loading texture from file: " << filename << std::endl;
-            return;
-        }
+    void draw(sf::RenderWindow& window);
 
-        sprite.setTexture(texture);
-        sprite.setPosition(position);
-        sprite.setScale(size.x / sprite.getLocalBounds().width, size.y / sprite.getLocalBounds().height);
-    }
+    void setPosition(const sf::Vector2f& position);
 
+    void setSize(const sf::Vector2f& size);
 
-    void draw(sf::RenderWindow& window) {
-        window.draw(sprite);
-    }
+    sf::Vector2f getPosition();
 
-    void setPosition(const sf::Vector2f& position) {
-        sprite.setPosition(position);
-    }
+    sf::Vector2f getSize();
 
-    void setSize(const sf::Vector2f& size) {
-        sprite.setScale(size.x / sprite.getLocalBounds().width, size.y / sprite.getLocalBounds().height);
-    }
-
-    sf::Vector2f getPosition() {
-        return sprite.getPosition();
-    }
-
-    sf::Vector2f getSize() {
-        return sf::Vector2f(sprite.getLocalBounds().width, sprite.getLocalBounds().height);
-    }
-
-    std::string findFile(const std::string& filename) {
-        std::string path = "";
-        std::string currentPath = std::filesystem::current_path();
-        if (std::filesystem::exists(currentPath + "/" + filename)) {
-            path = currentPath + "/" + filename;
-        } else {
-            std::cout << "file not found" << std::endl;
-            for (const auto& entry : std::filesystem::recursive_directory_iterator(currentPath)) {
-                std::cout << entry.path() << std::endl;
-                if (entry.path().filename() == filename) {
-                    path = entry.path();
-                    break;
-                }
-            }
-        }
-        return path;
-    }
-
+    std::string findFile(const std::string& filename);
 
 private:
     sf::Texture texture;

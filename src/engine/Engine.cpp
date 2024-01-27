@@ -6,9 +6,10 @@
 */
 
 #include "Engine.hpp"
-#include "../text/Text.hpp"
-#include "../sound/Sound.hpp"
-#include "../music/Music.hpp"
+#include "../Logging.hpp"
+#include "../Scene/Scenes/WhiteRectangle.hpp"
+#include "../Scene/Scenes/BlackRectangle.hpp"
+#include "../Scene/Scenes/Desktop.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -23,25 +24,25 @@ Engine::Engine()
 
 Engine::~Engine()
 {
+
 }
 
 void Engine::run()
 {
     sf::Clock clock;
-    Text text("Hello World !", sf::Vector2f(10, 10), 20, sf::Color::White);
-    Sound sound("content/assets/BoneCrackSound.ogg");
-    Music music("content/assets/Applaud.ogg");
-    // music.play();
-    sound.playSound();
-    while (_window.isOpen())
-    {
-        sf::Time deltaTime = clock.restart();
-        processEvents();
-        update(deltaTime);
-        // render();
-        _window.clear();
-        text.draw(_window);
-        _window.display();
+    sf::Time timeSinceLastUpdate = sf::Time::Zero;
+    sf::Time TimePerFrame = sf::seconds(1.f/60.f); // 60 fps
+    _sceneManager.switchScene(std::make_unique<Desktop>(_window));
+    while (_window.isOpen()) {
+        sf::Time elapsedTime = clock.restart();
+        timeSinceLastUpdate += elapsedTime;
+        while (timeSinceLastUpdate > TimePerFrame) {
+            timeSinceLastUpdate -= TimePerFrame;
+            processEvents();
+            update(TimePerFrame);
+        }
+        update(TimePerFrame);
+        render();
     }
 }
 
@@ -53,21 +54,26 @@ void Engine::processEvents()
         if (event.type == sf::Event::Closed)
             _window.close();
     }
+
+    Scene* currentScene = _sceneManager.getCurrentScene();
+    if (currentScene != nullptr) {
+        currentScene->processEvents(event);
+    }
     // std::cout << "Events processed successfully.\n";
 }
 
 void Engine::update(sf::Time deltaTime)
 {
-    // Your update logic here...
-    // std::cout << "Update completed successfully.\n";
+    Scene* currentScene = _sceneManager.getCurrentScene();
+    if (currentScene != nullptr)
+        currentScene->update(deltaTime);
 }
 
 void Engine::render()
 {
     _window.clear();
-    // _sceneManager.render(_window);
-    // start a simple black background
-    sf::RectangleShape background(sf::Vector2f(1920, 1080));
+    Scene* currentScene = _sceneManager.getCurrentScene();
+    if (currentScene != nullptr)
+        currentScene->render(_window);
     _window.display();
-    // std::cout << "Render completed successfully.\n";
 }

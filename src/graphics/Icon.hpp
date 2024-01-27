@@ -16,6 +16,15 @@ class Icon : public Sprite {
     public:
         Icon(std::string path);
         ~Icon() = default;
+        void hover(bool hovered);
+
+        void checkHover(sf::Vector2i mousePos);
+        void checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window);
+        void checkDrop(sf::Vector2i mousePos, sf::RenderWindow &window);
+        void checkMove(sf::Vector2i mousePos, sf::RenderWindow &window);
+    private:
+        bool _hovered;
+        bool _moving;
 };
     
 #endif /* _ICON_HPP_ */

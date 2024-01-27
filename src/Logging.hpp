@@ -7,6 +7,6 @@
 
 #pragma once
 
-#define IS_DEBUG 0
+#define IS_DEBUG 1
 
 #define LOG(x) if (IS_DEBUG) std::cout << x << std::endl

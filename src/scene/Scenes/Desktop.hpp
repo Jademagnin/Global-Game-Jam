@@ -16,7 +16,7 @@
 
     #include <functional>
 
-class Desktop : public Scene {
+    class Desktop : public Scene {
         public:
             Desktop(sf::RenderWindow &window);
             ~Desktop();

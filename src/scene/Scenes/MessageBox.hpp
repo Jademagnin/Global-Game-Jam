@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Scene.hpp"
+#include "../Scene.hpp"
 
 class MessageBox : public Scene {
     public:

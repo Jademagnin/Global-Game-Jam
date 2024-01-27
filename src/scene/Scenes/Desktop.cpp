@@ -7,6 +7,7 @@
 
 #include "Desktop.hpp"
 #include "WhiteRectangle.hpp"
+#include "../../utils/Logging.hpp"
 #include <iostream>
 #include <vector>
 #include <map>
@@ -102,7 +103,7 @@ void Desktop::processEvents(sf::Event event)
         });
     }
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
-        std::cout << "Right click" << std::endl;
+        LOG("Right click");
     }
 }
 

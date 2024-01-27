@@ -11,7 +11,7 @@
 int main()
 {
     Engine engine;
-    LOG("feur.\n");
+    LOG("feur.");
     engine.run();
     return 0;
 }

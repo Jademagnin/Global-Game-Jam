@@ -57,7 +57,6 @@ public:
         } else {
             std::cout << "file not found" << std::endl;
             for (const auto& entry : std::filesystem::recursive_directory_iterator(currentPath)) {
-                std::cout << entry.path() << std::endl;
                 if (entry.path().filename() == filename) {
                     path = entry.path();
                     break;

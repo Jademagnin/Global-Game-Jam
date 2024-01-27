@@ -12,8 +12,9 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
 {
     int row = 0;
     int col = 0;
+    InitTextBelow();
     for (int i = 0; i < 21; i++) {
-        _icon[i] = new Icon("folder.png");
+        _icon[i] = new Icon("folder.png", _text[i]);
         _pos[i] = sf::Vector2f(50 + (col * 128), 50 + (row * 128));
         _icon[i]->sprite.setPosition(_pos[i]);
         row++;
@@ -31,11 +32,26 @@ Desktop::~Desktop()
     }
 }
 
+void Desktop::InitTextBelow()
+{
+    int row = 0;
+    int col = 0;
+    for (int i = 0; i < 21; i++) {
+        _text[i] = new Text("folder", sf::Vector2f(20 + (col * 128), 50 + (row * 128) + 50), 20, sf::Color::White);
+        row++;
+        if (row == 7) {
+            row = 0;
+            col++;
+        }
+    }
+}
+
 
 void Desktop::render(sf::RenderWindow &window)
 {
     for (int i = 0; i < 21; i++) {
         window.draw(_icon[i]->sprite);
+        _text[i]->draw(window);
     }
 }
 
@@ -48,7 +64,7 @@ void Desktop::forEachIcon(Funcs... callbacks)
 {
     for (int i = 0; i < 21; i++) {
         ([&](auto callback) { callback(_icon[i]); }(callbacks), ...);
-    } 
+    }
     //when we wrote this, only god and we knew what it was
     //now, only god knows
 }
@@ -69,4 +85,8 @@ void Desktop::processEvents(sf::Event event)
             icon->checkDrop(sf::Mouse::getPosition(_window), _window);
         });
     }
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
+        std::cout << "Right click" << std::endl;
+    }
+    
 }

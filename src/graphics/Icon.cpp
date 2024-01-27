@@ -8,7 +8,7 @@
 #include "Icon.hpp"
 #include <iostream>
 
-Icon::Icon(std::string path) : Sprite(path), _hovered(false), _moving(false)
+Icon::Icon(std::string path, Text *text) : Sprite(path), _hovered(false), _moving(false), _text(text)
 {
     sprite.setScale(0.2, 0.2);
 }
@@ -37,6 +37,7 @@ void Icon::checkMove(sf::Vector2i mousePos, sf::RenderWindow &window)
     if (_moving) {
         sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
         sprite.setPosition(mousePos.x, mousePos.y);
+        _text->setPosition(sf::Vector2f(mousePos.x - 30, mousePos.y + 50));
     }
 }
 
@@ -44,6 +45,7 @@ void Icon::checkDrop(sf::Vector2i mousePos, sf::RenderWindow &window)
 {
     if (_moving) {
         sprite.setPosition(mousePos.x, mousePos.y);
+        _text->setPosition(sf::Vector2f(mousePos.x - 30, mousePos.y + 50));
         _moving = false;
     }
 }

@@ -29,6 +29,7 @@ class Text {
 
         void draw(sf::RenderWindow& window) const;
         void changeFont(std::string& newPath);
+        void setPosition(const sf::Vector2f& position) { _text.setPosition(position); }
 
     private:
         sf::Font _font;

@@ -104,6 +104,7 @@ desktop:
   - type: folder
     name: Corbeille
     action: 
+    #lorsque le joueur appuie sur la corbeille : la fenêtre "avertissement" apparaît 6 fois à différents endroits du bureau. le joueur doit les fermer en appuyant sur la croix. Tant que ces fenêtres ne sont pas fermés, il ne peut interagir avec rien d'autre.
       open: WARNING
   - type: folder
     name: Contrats

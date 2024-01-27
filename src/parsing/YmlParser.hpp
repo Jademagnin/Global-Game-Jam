@@ -15,6 +15,8 @@
         public:
             YmlParser();
             ~YmlParser();
+            int getNbOfFolderDesktop() const;
+            std::vector<std::string> getDesktop() const;
 
         protected:
         private:
@@ -22,3 +24,11 @@
     };
 
 #endif /* !YMLPARSER_HPP_ */
+
+/*
+for (YAML::const_iterator it = this->_node.begin(); it != this->_node.end(); ++it) {
+        const YAML::Node& item = *it;
+        std::string name = item["name"].as<std::string>();
+        std::cout << name << std::endl;
+    }
+*/

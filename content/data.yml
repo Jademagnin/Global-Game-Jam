@@ -1,9 +1,5 @@
 # yaml-language-server: $schema=./schema.json
 
-#dfgdfg
-#dfgdf
-#
-
 desktop:
   - type: folder
     name: Fourre-tout
@@ -107,9 +103,8 @@ desktop:
         name: "FIFOU 22"
   - type: folder
     name: Corbeille
-    action: {
-     open: WARNING
-    }
+    action: 
+      open: WARNING
   - type: folder
     name: Contrats
   - type: folder

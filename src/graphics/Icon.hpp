@@ -19,12 +19,14 @@ class Icon : public Sprite {
         ~Icon() = default;
         void hover(bool hovered);
         void checkHover(sf::Vector2i mousePos);
-        void checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window);
+        bool checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window);
         void checkDrop(sf::Vector2i mousePos, sf::RenderWindow &window);
         void checkMove(sf::Vector2i mousePos, sf::RenderWindow &window);
+        void setHovered(bool hovered) { _hovered = hovered; };
+        void setMoving(bool moving) { _moving = moving; };
         void setPosition(sf::Vector2f pos) {
             sprite.setPosition(pos);
-            _text->setPosition(sf::Vector2f(pos.x, pos.y + 60));
+            _text->setPosition(sf::Vector2f(pos.x, pos.y + 42.5));
         };
         void moveFrame() {
             if (_hovered)
@@ -37,7 +39,7 @@ class Icon : public Sprite {
     private:
         bool _hovered;
         bool _moving;
-        Text *_text;
+        TextArray *_text;
 };
     
 #endif /* _ICON_HPP_ */

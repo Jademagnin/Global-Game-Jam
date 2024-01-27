@@ -46,11 +46,15 @@ Desktop::~Desktop()
 
 void Desktop::render(sf::RenderWindow &window)
 {
-     for (int i = 0; i < _folderNumber; i++) {
-        _icon[i]->moveFrame();
+    for (int i = 0; i < _folderNumber; i++) {
+            _icon[i]->moveFrame();
     }
     for (int i = 0; i < _folderNumber; i++) {
-        _icon[i]->render(window);
+         if (_icon[i] != _draggedFolder)
+            _icon[i]->render(window);
+    }
+    if (_draggedFolder != nullptr) {
+        _draggedFolder->render(window);
     }
 }
 
@@ -69,18 +73,25 @@ void Desktop::processEvents(sf::Event event)
     sf::Vector2i pixelPos = sf::Mouse::getPosition(_window); // window coordinates
 
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-        forEachIcon([&](Icon* icon) {
-            icon->checkDrag(pixelPos, _window);
-        });
+        for (int i = 0; i < _folderNumber; i++) {
+            if (_icon[i]->checkDrag(pixelPos, _window)) {
+                _draggedFolder = _icon[i];
+                break;
+            }
+        }
     } else if (event.type == sf::Event::MouseMoved) {
-        forEachIcon([&](Icon* icon) {
-            icon->checkMove(pixelPos, _window);
-            icon->checkHover(pixelPos);
-        });
+        if (_draggedFolder != nullptr) {
+            _draggedFolder->checkMove(pixelPos, _window);
+        } else {
+            for (int i = 0; i < _folderNumber; i++) {
+                _icon[i]->checkHover(pixelPos);
+            }
+        }
     } else if (event.type == sf::Event::MouseButtonReleased) {
-        forEachIcon([&](Icon* icon) {
-            icon->checkDrop(pixelPos, _window);
-        });
+        if (_draggedFolder != nullptr) {
+            _draggedFolder->setMoving(false);
+            _draggedFolder = nullptr;
+        }
     }
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
         std::cout << "Right click" << std::endl;

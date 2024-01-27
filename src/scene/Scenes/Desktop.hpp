@@ -32,6 +32,8 @@ class Desktop : public Scene {
             sf::Vector2f *_pos;
             sf::RenderWindow &_window;
             int _folderNumber;
+            Icon* _hoveredFolder = nullptr;
+            Icon* _draggedFolder = nullptr;
             SceneManager& _sceneManager = SceneManager::getInstance();
     };
 

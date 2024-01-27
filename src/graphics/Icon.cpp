@@ -9,10 +9,27 @@
 #include <iostream>
 #include "../text/Text.hpp"
 
+std::vector<std::string> formatLabel(std::string label)
+{
+    std::vector<std::string> lines;
+    std::string line = "";
+    int i = 0;
+    while (i < label.size()) {
+        if (label[i] == ' ') {
+            lines.push_back(line);
+            line = "";
+        } else {
+            line += label[i];
+        }
+        i++;
+    }
+    lines.push_back(line);
+    return lines;
+}
+
 Icon::Icon(std::string path, const std::string label, int n_frames) : Sprite(path, n_frames), _hovered(false), _moving(false)
 {
-    _text = new Text(label, sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + 50), 15, sf::Color::White);
-    _text->setPosition(sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + 50));
+    _text = new TextArray(formatLabel(label), sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + 20), 15, sf::Color::White);
     sprite.setScale(0.2, 0.2);
 }
 
@@ -31,12 +48,13 @@ void Icon::checkHover(sf::Vector2i mousePos)
     }
 }
 
-void Icon::checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window)
+bool Icon::checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window)
 {
-    (void)mousePos;
-    if (sprite.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
+    if (sprite.getGlobalBounds().contains(window.mapPixelToCoords(mousePos))) {
         _moving = true;
+        return true;
     }
+    return false;
 }
 
 void Icon::checkMove(sf::Vector2i mousePos, sf::RenderWindow &window)

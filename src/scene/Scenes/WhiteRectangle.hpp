@@ -13,8 +13,10 @@ class WhiteRectangle: public Scene {
     public:
         WhiteRectangle();
         ~WhiteRectangle();
-        void update(sf::Time deltaTime);
         void render(sf::RenderWindow &window);
+        void processEvents(sf::Event event);
+
     protected:
     private:
+        sf::RectangleShape _rectangle;
 };

@@ -11,12 +11,11 @@
     #include "../Scene.hpp"
     #include "../../graphics/Icon.hpp"
     #include <functional>
-    
+
 class Desktop : public Scene {
         public:
             Desktop(sf::RenderWindow &window);
             ~Desktop();
-            void update(sf::Time deltaTime);
             void render(sf::RenderWindow &window);
             void processEvents(sf::Event event);
             template<typename... Funcs>
@@ -26,5 +25,5 @@ class Desktop : public Scene {
             sf::Vector2f _pos[21];
             sf::RenderWindow &_window;
     };
-    
+
 #endif /* _DESKTOP_HPP_ */

@@ -39,16 +39,12 @@ void Desktop::render(sf::RenderWindow &window)
     }
 }
 
-void Desktop::update(sf::Time deltaTime)
-{
-}
-
 template<typename... Funcs>
 void Desktop::forEachIcon(Funcs... callbacks)
 {
     for (int i = 0; i < 21; i++) {
         ([&](auto callback) { callback(_icon[i]); }(callbacks), ...);
-    } 
+    }
     //when we wrote this, only god and we knew what it was
     //now, only god knows
 }

@@ -6,6 +6,7 @@
 */
 
 #include "Desktop.hpp"
+#include "WhiteRectangle.hpp"
 #include <iostream>
 #include <vector>
 #include <map>
@@ -16,11 +17,11 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
     std::vector<std::map<std::string, int>> files;
     for (int i = 0; i < 16; i++)
         files.push_back(std::map<std::string, int>{{"folder.png", 1}});
-    files.push_back(std::map<std::string, int>{{"download.png", 8}});
-    files.push_back(std::map<std::string, int>{{"random.png", 10}});
-    files.push_back(std::map<std::string, int>{{"fesses.png", 6}});
-    files.push_back(std::map<std::string, int>{{"musique.png", 14}});
-    files.push_back(std::map<std::string, int>{{"horreur.png", 8}});
+    files.push_back(std::map<std::string, int>{{"download/download_sheet.png", 8}});
+    files.push_back(std::map<std::string, int>{{"random/random_sheet.png", 10}});
+    files.push_back(std::map<std::string, int>{{"cheeks/cheek_sheet.png", 6}});
+    files.push_back(std::map<std::string, int>{{"music/spritesheet.png", 14}});
+    files.push_back(std::map<std::string, int>{{"horror/horror_sheet.png", 8}});
     int row = 0;
     int col = 0;
 
@@ -60,7 +61,6 @@ void Desktop::InitTextBelow()
     }
 }
 
-
 void Desktop::render(sf::RenderWindow &window)
 {
     _background->draw(window);
@@ -72,7 +72,6 @@ void Desktop::render(sf::RenderWindow &window)
         _text[i]->draw(window);
     }
 }
-
 
 template<typename... Funcs>
 void Desktop::forEachIcon(Funcs... callbacks)

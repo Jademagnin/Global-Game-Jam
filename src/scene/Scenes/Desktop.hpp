@@ -13,6 +13,7 @@
     #include "../../text/Text.hpp"
     #include "../../parsing/YmlParser.hpp"
     #include "../../graphics/AssetsLoader.hpp"
+    #include "../../scene/SceneManager.hpp"
 
     #include <functional>
 
@@ -35,6 +36,7 @@ class Desktop : public Scene {
             YmlParser _yml;
             AssetsLoader<sf::Sprite>* _background;
 
+            SceneManager& _sceneManager = SceneManager::getInstance();
     };
 
 #endif /* _DESKTOP_HPP_ */

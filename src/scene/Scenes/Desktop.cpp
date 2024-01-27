@@ -6,6 +6,7 @@
 */
 
 #include "Desktop.hpp"
+#include "WhiteRectangle.hpp"
 #include <iostream>
 #include <vector>
 #include <map>
@@ -43,7 +44,6 @@ Desktop::~Desktop()
     delete[] _icon;
 }
 
-
 void Desktop::render(sf::RenderWindow &window)
 {
      for (int i = 0; i < _folderNumber; i++) {
@@ -53,7 +53,6 @@ void Desktop::render(sf::RenderWindow &window)
         _icon[i]->render(window);
     }
 }
-
 
 template<typename... Funcs>
 void Desktop::forEachIcon(Funcs... callbacks)
@@ -86,5 +85,4 @@ void Desktop::processEvents(sf::Event event)
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
         std::cout << "Right click" << std::endl;
     }
-    
 }

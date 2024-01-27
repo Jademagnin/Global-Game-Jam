@@ -12,6 +12,7 @@
     #include "../../graphics/Icon.hpp"
     #include "../../text/Text.hpp"
     #include "../../parsing/YmlParser.hpp"
+    #include "../../scene/SceneManager.hpp"
 
     #include <functional>
 
@@ -24,14 +25,14 @@ class Desktop : public Scene {
             template<typename... Funcs>
             void forEachIcon(Funcs... callbacks);
             void InitTextBelow();
-            
+
         private:
             YmlParser _yml;
             Icon** _icon;
             sf::Vector2f *_pos;
             sf::RenderWindow &_window;
             int _folderNumber;
-
+            SceneManager& _sceneManager = SceneManager::getInstance();
     };
 
 #endif /* _DESKTOP_HPP_ */

@@ -15,8 +15,11 @@
 class SceneManager
 {
     public:
-        SceneManager() {};
-        void operator=(SceneManager const&) = delete;
+        static SceneManager& getInstance()
+        {
+            static SceneManager instance;
+            return instance;
+        }
         void switchScene(std::shared_ptr<Scene> scene);
         void popScene(std::shared_ptr<Scene> scene);
         Scene* getTopScene();
@@ -26,22 +29,25 @@ class SceneManager
         std::vector<std::shared_ptr<Scene>> getUnstagedScenes() const { return _unstagedScenes; };
 
     private:
+        SceneManager() {};
+        SceneManager(SceneManager const&) = delete;
+        void operator=(SceneManager const&) = delete;
 
         std::vector<std::shared_ptr<Scene>> _stagedScenes;
         std::vector<std::shared_ptr<Scene>> _unstagedScenes;
 };
 
-class UniqueSceneManager
-{
-    public:
-        static SceneManager& getInstance()
-        {
-            static SceneManager instance;
-            return instance;
-        }
-        SceneManager instance = SceneManager();
-    private:
-        UniqueSceneManager() {};
-};
+// class UniqueSceneManager
+// {
+//     public:
+//         static SceneManager& getInstance()
+//         {
+//             static SceneManager instance;
+//             return instance;
+//         }
+//         SceneManager instance = SceneManager();
+//     private:
+//         UniqueSceneManager() {};
+// };
 
 #endif /* !SCENEMANAGER_HPP_ */

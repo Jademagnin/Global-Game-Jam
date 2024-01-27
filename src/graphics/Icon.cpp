@@ -33,6 +33,7 @@ void Icon::checkHover(sf::Vector2i mousePos)
 
 void Icon::checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window)
 {
+    (void)mousePos;
     if (sprite.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
         _moving = true;
     }
@@ -40,6 +41,7 @@ void Icon::checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window)
 
 void Icon::checkMove(sf::Vector2i mousePos, sf::RenderWindow &window)
 {
+    (void)window;
     if (_moving) {
         this->setPosition(window.mapPixelToCoords(mousePos));
     }
@@ -47,6 +49,7 @@ void Icon::checkMove(sf::Vector2i mousePos, sf::RenderWindow &window)
 
 void Icon::checkDrop(sf::Vector2i mousePos, sf::RenderWindow &window)
 {
+    (void)window;
     if (_moving) {
         this->setPosition(window.mapPixelToCoords(mousePos));
         _moving = false;

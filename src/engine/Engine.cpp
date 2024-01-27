@@ -76,7 +76,8 @@ void Engine::render()
 {
     _window.clear();
 
-    for (auto& scene : _sceneManager.getStagedScenes()) {
+    auto& sceneManager = SceneManager::getInstance();
+    for (auto& scene : sceneManager.getStagedScenes()) {
         scene->render(_window);
     }
 

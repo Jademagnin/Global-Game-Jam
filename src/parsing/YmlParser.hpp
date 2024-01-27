@@ -17,7 +17,9 @@
             ~YmlParser() = default;
             int getNbOfFolderDesktop() const;
             std::vector<std::string> getDesktop() const;
-
+            std::unordered_map<std::string, std::string> getFolderContent(const std::string& folderName) const;
+            void getFolderContentRecursive(const std::vector<std::string>& folders, int index, const YAML::Node& currentNode, std::unordered_map<std::string, std::string>& folderContent) const;
+            YAML::Node getInfoFromName(const std::string& name) const;
         protected:
         private:
             YAML::Node _node;
@@ -25,11 +27,3 @@
     };
 
 #endif /* !YMLPARSER_HPP_ */
-
-/*
-for (YAML::const_iterator it = this->_node.begin(); it != this->_node.end(); ++it) {
-        const YAML::Node& item = *it;
-        std::string name = item["name"].as<std::string>();
-        std::cout << name << std::endl;
-    }
-*/

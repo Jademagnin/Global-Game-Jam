@@ -22,6 +22,7 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
             col++;
         }
     }
+    for
 }
 
 Desktop::~Desktop()
@@ -48,7 +49,7 @@ void Desktop::forEachIcon(Funcs... callbacks)
 {
     for (int i = 0; i < 21; i++) {
         ([&](auto callback) { callback(_icon[i]); }(callbacks), ...);
-    } 
+    }
     //when we wrote this, only god and we knew what it was
     //now, only god knows
 }

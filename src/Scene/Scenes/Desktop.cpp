@@ -12,6 +12,7 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
 {
     int row = 0;
     int col = 0;
+
     InitTextBelow();
     for (int i = 0; i < 21; i++) {
         _icon[i] = new Icon("folder.png", _text[i]);

@@ -1,6 +1,39 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
+        "Application": {
+            "allOf": [
+                {
+                    "properties": {
+                        "comment": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "path": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ],
+                    "type": "object"
+                },
+                {
+                    "properties": {
+                        "type": {
+                            "const": "application",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ],
+                    "type": "object"
+                }
+            ]
+        },
         "Audio": {
             "allOf": [
                 {
@@ -70,6 +103,9 @@
         "Files": {
             "anyOf": [
                 {
+                    "$ref": "#/definitions/Application"
+                },
+                {
                     "$ref": "#/definitions/Video"
                 },
                 {
@@ -83,6 +119,10 @@
                 },
                 {
                     "properties": {
+                        "action": {
+                            "const": "OPEN_WARNING",
+                            "type": "string"
+                        },
                         "comment": {
                             "type": "string"
                         },
@@ -110,7 +150,6 @@
                         }
                     },
                     "required": [
-                        "files",
                         "name",
                         "type"
                     ],
@@ -198,3 +237,4 @@
     ],
     "type": "object"
 }
+

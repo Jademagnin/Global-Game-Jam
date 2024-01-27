@@ -32,6 +32,8 @@ public:
 
     std::string findFile(const std::string& filename);
 
+    T getSprite() { return sprite; }
+
 private:
     sf::Texture texture;
     sf::Sprite sprite;

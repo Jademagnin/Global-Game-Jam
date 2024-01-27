@@ -24,6 +24,7 @@ class Desktop : public Scene {
             template<typename... Funcs>
             void forEachIcon(Funcs... callbacks);
             void InitTextBelow();
+            
         private:
             Icon* _icon[21];
             sf::Vector2f _pos[21];

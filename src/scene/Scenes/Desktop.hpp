@@ -28,9 +28,9 @@ class Desktop : public Scene {
         private:
             YmlParser _yml;
             Icon** _icon;
-            Text** _text;
             sf::Vector2f *_pos;
             sf::RenderWindow &_window;
+            int _folderNumber;
 
     };
 

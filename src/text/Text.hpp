@@ -24,6 +24,7 @@ class Text {
             _text.setString(_string);
             _text.setCharacterSize(_fontSize);
             _text.setFillColor(_color);
+            _text.setOrigin(_text.getGlobalBounds().width / 2, _text.getGlobalBounds().height / 2);
             _text.setPosition(_position);
         }
 

@@ -13,6 +13,9 @@
 Desktop::Desktop(sf::RenderWindow &window) : _window(window)
 {
     //string is the name of the file, int is the number of frames
+    _icon = new Icon*[21];
+    _text = new Text*[21];
+    _pos = new sf::Vector2f[21];
     std::vector<std::map<std::string, int>> files;
     for (int i = 0; i < 16; i++)
         files.push_back(std::map<std::string, int>{{"folder.png", 1}});

@@ -12,8 +12,9 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
 {
     int row = 0;
     int col = 0;
+    InitTextBelow();
     for (int i = 0; i < 21; i++) {
-        _icon[i] = new Icon("folder.png");
+        _icon[i] = new Icon("folder.png", _text[i]);
         _pos[i] = sf::Vector2f(50 + (col * 128), 50 + (row * 128));
         _icon[i]->sprite.setPosition(_pos[i]);
         row++;
@@ -22,7 +23,6 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
             col++;
         }
     }
-    InitTextBelow();
 }
 
 Desktop::~Desktop()

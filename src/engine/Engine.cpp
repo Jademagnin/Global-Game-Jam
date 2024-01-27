@@ -41,6 +41,7 @@ void Engine::run()
             processEvents();
             update(TimePerFrame);
         }
+        update(TimePerFrame);
         render();
     }
 }
@@ -52,6 +53,11 @@ void Engine::processEvents()
     {
         if (event.type == sf::Event::Closed)
             _window.close();
+    }
+
+    Scene* currentScene = _sceneManager.getCurrentScene();
+    if (currentScene != nullptr) {
+        currentScene->processEvents(event);
     }
     // std::cout << "Events processed successfully.\n";
 }

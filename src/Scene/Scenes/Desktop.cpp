@@ -55,7 +55,7 @@ void Desktop::forEachIcon(Funcs... callbacks)
 
 void Desktop::processEvents(sf::Event event)
 {
-    if (event.type == sf::Event::MouseButtonPressed) {
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         forEachIcon([&](Icon* icon) {
             icon->checkDrag(sf::Mouse::getPosition(_window), _window);
         });

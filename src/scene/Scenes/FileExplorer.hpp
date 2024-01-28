@@ -28,6 +28,7 @@ class FileExplorer: public Scene {
         int _fileId = 0;
         sf::RenderWindow &_window;
         YmlParser _yml;
+        Text **_text;
 };
 
 #endif

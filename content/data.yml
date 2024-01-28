@@ -54,7 +54,7 @@ desktop:
       - type: document
         name: Lettre de motivation
       - type: document
-        name: "Lettre de démission"
+        name: "Lettre de demission"
       - type: document
         name: "Lettre de licenciement"
       - type: document
@@ -65,12 +65,12 @@ desktop:
     name: Telechargements
     action:
       open: CHAT_NARRATOR
-      text: "... Je préfère ne pas vous dire ce que j'ai téléchargé ici ..."
+      text: "... Je prefere ne pas vous dire ce que j'ai telecharge ici ..."
     files: 
       - type: video
-        name: "Vidéo de chatons"
+        name: "Video de chatons"
       - type: video
-        name: "La présidence pour les nuls"
+        name: "La presidence pour les nuls"
       - type: document
         name: "Cours de droit constitutionnel"
       - type: document
@@ -104,7 +104,7 @@ desktop:
   - type: folder
     name: Corbeille
     action: 
-    #lorsque le joueur appuie sur la corbeille : la fenêtre "avertissement" apparaît 6 fois à différents endroits du bureau. le joueur doit les fermer en appuyant sur la croix. Tant que ces fenêtres ne sont pas fermés, il ne peut interagir avec rien d'autre.
+    #lorsque le joueur appuie sur la corbeille : la fenêtre "avertissement" apparaît 6 fois à differents endroits du bureau. le joueur doit les fermer en appuyant sur la croix. Tant que ces fenêtres ne sont pas fermes, il ne peut interagir avec rien d'autre.
       open: WARNING
   - type: folder
     name: Contrats
@@ -120,7 +120,7 @@ desktop:
     name: Musiques
     action:
       open: CHAT_NARRATOR
-      text: "Je suis un grand fan de musique, je vous laisse écouter mes playlists !"
+      text: "Je suis un grand fan de musique, je vous laisse ecouter mes playlists !"
     files:
       - type: audio
         name: "Playlist 1"
@@ -146,11 +146,11 @@ desktop:
     name: Notes
     files: 
       - type: document
-        name: "Notes de réunion"
+        name: "Notes de reunion"
       - type: document
         name: "Blagues"
       - type: document
-        name: "Disquette pour pécho"
+        name: "Disquette pour pecho"
       - type: document
         name: "Mots de passe"
       - type: document
@@ -158,9 +158,9 @@ desktop:
       - type: document
         name: "Liste de courses"
       - type: document
-        name: "Résultats des courses 2025"
+        name: "Resultats des courses 2025"
       - type: document
         name: "Bac 2020"
 action: 
   open: CHAT_NARRATOR
-  text: Voici mon pc, je souhaiterais que vous trouviez un certain dossier qui doit absolument être supprimé dans les plus bref délais.
+  text: Voici mon pc, je souhaiterais que vous trouviez un certain dossier qui doit absolument être supprime dans les plus bref delais.

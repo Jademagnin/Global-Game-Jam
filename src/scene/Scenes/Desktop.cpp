@@ -126,7 +126,6 @@ void Desktop::processEvents(sf::Event event)
         {
             Sound sound("assets/music/scream.ogg", 50, 2000);
             sound.playSound();
-            std::cout << "Volume" << std::endl;
         }
     }
 }

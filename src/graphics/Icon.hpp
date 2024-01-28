@@ -44,8 +44,7 @@ class Icon : public Sprite {
         }
         void click(sf::Vector2i mousePos, sf::RenderWindow &window) {
             if (sprite.getGlobalBounds().contains(window.mapPixelToCoords(mousePos))) {
-                std::cout << _label << " clicked" << std::endl;
-                _sceneManager.switchScene(_scene);
+                _sceneManager.stageScene(_scene);
             }
         }
     private:

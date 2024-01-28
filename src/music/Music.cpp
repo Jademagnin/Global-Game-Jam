@@ -5,16 +5,16 @@
 // ** Sound
 // */
 
-// #include "Music.hpp"
+#include "Music.hpp"
 
-// void Music::play() {
-//     this->_music.play();
-// }
+void Music::play() {
+    this->_music.play();
+}
 
-// void Music::pause() {
-//     this->_music.pause();
-// }
+void Music::pause() {
+    this->_music.pause();
+}
 
-// void Music::stop() {
-//     this->_music.stop();
-// }
+void Music::stop() {
+    this->_music.stop();
+}

@@ -35,6 +35,8 @@ class Desktop : public Scene {
             Text* _text[21];
             YmlParser _yml;
             AssetsLoader<sf::Sprite>* _background;
+            AssetsLoader<sf::Sprite>* _toolbar;
+            AssetsLoader<sf::Sprite>* _volume;
 
             SceneManager& _sceneManager = SceneManager::getInstance();
     };

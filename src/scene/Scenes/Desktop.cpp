@@ -12,6 +12,11 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include "../../sound/Sound.hpp"
+#include "../../graphics/AssetsLoader.hpp"
+#include <SFML/Audio.hpp>
+#include "../../music/Music.hpp"
+// #include "SFML/
 
 Desktop::Desktop(sf::RenderWindow &window) : _window(window)
 {
@@ -66,6 +71,8 @@ void Desktop::InitTextBelow()
 void Desktop::render(sf::RenderWindow &window)
 {
     _background->draw(window);
+    _toolbar->draw(window);
+    _volume->draw(window);
      for (int i = 0; i < 21; i++) {
         _icon[i]->moveFrame();
     }
@@ -117,9 +124,19 @@ void Desktop::processEvents(sf::Event event)
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
         LOG("Right click");
     }
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+        if (pixelPos.x >= 1800 && pixelPos.x <= 1880 && pixelPos.y >= 995 && pixelPos.y <= 1075)
+        {
+            Sound sound("assets/music/scream.ogg", 50, 2000);
+            sound.playSound();
+            std::cout << "Volume" << std::endl;
+        }
+    }
 }
 
 void Desktop::setBackGround()
 {
     _background = new AssetsLoader<sf::Sprite>("background.png", sf::Vector2f(0, 0), sf::Vector2f(1920, 1080));
+    _toolbar = new AssetsLoader<sf::Sprite>("toolbar.png", sf::Vector2f(0, 990), sf::Vector2f(1920, 1080 / 12));
+    _volume = new AssetsLoader<sf::Sprite>("volume.png", sf::Vector2f(1800, 995), sf::Vector2f(80, 80));
 }

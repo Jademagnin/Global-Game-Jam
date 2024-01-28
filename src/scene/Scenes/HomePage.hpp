@@ -37,7 +37,7 @@ class HomePage: public Scene {
         Dialog *_dialog;
         Dialog *_dialog2;
         AssetsLoader<sf::Sprite> *_background;
-        Button *_button;
+        // Button *_button;
         std::vector<Dialog> _dialogs;
 };
 

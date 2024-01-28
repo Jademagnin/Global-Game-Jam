@@ -27,7 +27,7 @@ Engine::Engine()
 
     // init all scenes
     // Default scene
-    // _sceneManager.stageScene(std::make_unique<Desktop>(_window));
+    _sceneManager.stageScene(std::make_unique<Desktop>(_window));
     _sceneManager.stageScene(std::make_unique<ImageViewer>(_window, "president.png"));
     _sceneManager.setMouseScene(std::make_unique<Mouse>(_window));
     // Secondary scenes

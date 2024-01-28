@@ -73,13 +73,12 @@ void Engine::processEvents()
             _window.close();
         if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
             _window.close();
+        // feur
+        for (auto& scene : _sceneManager.getStagedScenes()) {
+            scene->processEvents(event);
+        }
+        _sceneManager.getMouseScene()->processEvents(event);
     }
-
-    // Loop into staged scenes and process events
-    for (auto& scene : _sceneManager.getStagedScenes()) {
-        scene->processEvents(event);
-    }
-    _sceneManager.getMouseScene()->processEvents(event);
 
 }
 

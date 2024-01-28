@@ -8,7 +8,6 @@ void Circle::draw(sf::RenderWindow& window, const sf::Color& color, const sf::Ve
     window.draw(circle);
 }
 
-
 void Rectangle::draw(sf::RenderWindow& window, const sf::Color& color, const sf::Vector2f& position)
 {
     sf::RectangleShape rectangle(this->_size);

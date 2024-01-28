@@ -8,21 +8,29 @@
 #pragma once
 
 #include "../Scene.hpp"
+#include "../../text/Text.hpp"
+#include "../../graphics/Icon.hpp"
 
 class MessageBox : public Scene {
     public:
-        MessageBox(sf::RenderWindow &window, std::string message,
-            int width = 250, int height = 100);
+        MessageBox(sf::RenderWindow &window,
+            const std::string title, const std::string message,
+            const sf::Vector2f &position,
+            const sf::Vector2i &size = sf::Vector2i(200, 100));
         ~MessageBox();
         void render(sf::RenderWindow &window);
         void processEvents(sf::Event event);
 
     protected:
     private:
-        sf::RectangleShape _rectangle;
-        sf::Text _text;
+        sf::RectangleShape _topBar;
+        sf::RectangleShape _body;
+        Text *_title;
+        Text *_text;
         sf::Font _font;
         sf::RenderWindow &_window;
-        int _width;
-        int _height;
+        sf::Vector2f _position;
+        sf::Vector2i _size;
+        Icon *_icon;
+        Icon *_closeIcon;
 };

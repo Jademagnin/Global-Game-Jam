@@ -12,11 +12,13 @@
 #include "../scene/Scenes/WhiteRectangle.hpp"
 #include "../scene/Scenes/BlackRectangle.hpp"
 #include "../scene/Scenes/Desktop.hpp"
+#include "../scene/Scenes/MessageBox.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
 Engine::Engine()
-    : _window(sf::VideoMode::getDesktopMode(), "Global Game Jam", sf::Style::Fullscreen)
+    // : _window(sf::VideoMode::getDesktopMode(), "Global Game Jam", sf::Style::Fullscreen)
+    : _window(sf::VideoMode(1920, 1080), "Global Game Jam")
 {
     _window.setFramerateLimit(60);
     _window.setActive(true);
@@ -24,11 +26,12 @@ Engine::Engine()
 
     // init all scenes
     // Default scene
-    _sceneManager.stageScene(std::make_unique<Desktop>(_window));
+    _sceneManager.stageScene(std::make_unique<MessageBox>(_window, "title", "Hello World", sf::Vector2f(_window.getSize().x / 2, _window.getSize().y / 2),
+        sf::Vector2i(500, 250)));
 
     // Secondary scenes
-    _sceneManager.unstageScene(std::make_unique<WhiteRectangle>());
-    _sceneManager.unstageScene(std::make_unique<BlackRectangle>());
+    // _sceneManager.unstageScene(std::make_unique<WhiteRectangle>());
+    // _sceneManager.unstageScene(std::make_unique<BlackRectangle>());
 
     LOG("Engine initialized successfully.");
 }

@@ -20,6 +20,8 @@
 #include <functional>
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include "../../scene/SceneManager.hpp"
+#include "../../scene/Scenes/Desktop.hpp"
 
 class HomePage: public Scene {
     public:
@@ -37,9 +39,10 @@ class HomePage: public Scene {
         Dialog *_dialog;
         Dialog *_dialog2;
         AssetsLoader<sf::Sprite> *_background;
-        Button *_button;
+        // Button *_button;
         std::vector<Dialog> _dialogs;
         AssetsLoader<sf::Sprite> *_login;
+        SceneManager &_sceneManager = SceneManager::getInstance();
 };
 
 

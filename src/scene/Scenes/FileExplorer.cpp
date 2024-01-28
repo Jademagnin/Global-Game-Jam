@@ -10,6 +10,7 @@
 
 FileExplorer::FileExplorer(sf::RenderWindow &window, std::string &path) : _window(window)
 {
+    std::cout << "FileExplorer: opened " << path << std::endl;
     this->_explorer = new AssetsLoader<sf::Sprite>("explorer.png", sf::Vector2f(0, 0), sf::Vector2f(1100, 800));
 }
 

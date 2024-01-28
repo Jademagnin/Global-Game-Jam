@@ -33,7 +33,7 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
     int col = 0;
     setBackGround();
     for (int i = 0; i < _folderNumber; i++) {
-        _icon[i] = new Icon("folder.png", folders[i], std::make_unique<FileExplorer>(window), 1);
+        _icon[i] = new Icon("folder.png", folders[i], std::make_unique<FileExplorer>(window, folders[i]), 1);
         _pos[i] = sf::Vector2f(50 + (col * 128), 50 + (row * 128));
         _icon[i]->sprite.setScale(0.2, 0.2);
         _icon[i]->setPosition(_pos[i]);

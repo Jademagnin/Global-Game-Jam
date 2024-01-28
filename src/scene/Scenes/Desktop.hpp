@@ -12,6 +12,7 @@
     #include "../../graphics/Icon.hpp"
     #include "../../text/Text.hpp"
     #include "../../parsing/YmlParser.hpp"
+    #include "../../graphics/AssetsLoader.hpp"
     #include "../../scene/SceneManager.hpp"
 
     #include <functional>
@@ -25,6 +26,7 @@
             template<typename... Funcs>
             void forEachIcon(Funcs... callbacks);
             void InitTextBelow();
+            void setBackGround();
 
         private:
             YmlParser _yml;
@@ -34,6 +36,10 @@
             int _folderNumber;
             Icon* _hoveredFolder = nullptr;
             Icon* _draggedFolder = nullptr;
+            AssetsLoader<sf::Sprite>* _background;
+            AssetsLoader<sf::Sprite>* _toolbar;
+            AssetsLoader<sf::Sprite>* _volume;
+
             SceneManager& _sceneManager = SceneManager::getInstance();
     };
 

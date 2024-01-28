@@ -7,9 +7,16 @@
 
 #include "Desktop.hpp"
 #include "WhiteRectangle.hpp"
+#include "FileExplorer.hpp"
+#include "../../utils/Logging.hpp"
 #include <iostream>
 #include <vector>
 #include <map>
+#include "../../sound/Sound.hpp"
+#include "../../graphics/AssetsLoader.hpp"
+#include <SFML/Audio.hpp>
+#include "../../music/Music.hpp"
+// #include "SFML/
 
 Desktop::Desktop(sf::RenderWindow &window) : _window(window)
 {
@@ -23,9 +30,10 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
     int maxIconByRow = 7;
     int row = 0;
     int col = 0;
+    setBackGround();
     for (int i = 0; i < _folderNumber; i++) {
-        _pos[i] = sf::Vector2f(50 + (col * 128), 50 + (row * 128));
         _icon[i] = new Icon("folder.png", folders[i], 1);
+        _pos[i] = sf::Vector2f(50 + (col * 128), 50 + (row * 128));
         _icon[i]->sprite.setScale(0.2, 0.2);
         _icon[i]->setPosition(_pos[i]);
         row++;
@@ -42,12 +50,16 @@ Desktop::~Desktop()
         delete _icon[i];
     }
     delete[] _icon;
+    delete _background;
 }
 
 void Desktop::render(sf::RenderWindow &window)
 {
-    for (int i = 0; i < _folderNumber; i++) {
-            _icon[i]->moveFrame();
+    _background->draw(window);
+    _toolbar->draw(window);
+    _volume->draw(window);
+     for (int i = 0; i < _folderNumber; i++) {
+        _icon[i]->moveFrame();
     }
     for (int i = 0; i < _folderNumber; i++) {
          if (_icon[i] != _draggedFolder)
@@ -70,7 +82,9 @@ void Desktop::forEachIcon(Funcs... callbacks)
 
 void Desktop::processEvents(sf::Event event)
 {
-    sf::Vector2i pixelPos = sf::Mouse::getPosition(_window); // window coordinates
+    static sf::Clock clickClock;
+    static bool isSingleClick = false;
+    sf::Vector2i pixelPos = sf::Mouse::getPosition(_window);
 
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         for (int i = 0; i < _folderNumber; i++) {
@@ -79,6 +93,18 @@ void Desktop::processEvents(sf::Event event)
                 break;
             }
         }   
+        // handle double click events here
+        if (clickClock.getElapsedTime().asMilliseconds() < 200) {
+            isSingleClick = false;
+            LOG("Double click");
+            _sceneManager.stageScene(std::make_unique<FileExplorer>(_window));
+        } else {
+            isSingleClick = true;
+            clickClock.restart();
+        }
+        forEachIcon([&](Icon* icon) {
+            icon->checkDrag(pixelPos, _window);
+        });
     } else if (event.type == sf::Event::MouseMoved) {
         if (_draggedFolder != nullptr) {
             _draggedFolder->checkMove(pixelPos, _window);
@@ -87,9 +113,26 @@ void Desktop::processEvents(sf::Event event)
                 _icon[i]->checkHover(pixelPos);
         }
     } else if (event.type == sf::Event::MouseButtonReleased) {
-        if (_draggedFolder != nullptr) {
-            _draggedFolder->setMoving(false);
-            _draggedFolder = nullptr;
+        forEachIcon([&](Icon* icon) {
+            icon->checkDrop(pixelPos, _window);
+        });
+    }
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
+        LOG("Right click");
+    }
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+        if (pixelPos.x >= 1800 && pixelPos.x <= 1880 && pixelPos.y >= 995 && pixelPos.y <= 1075)
+        {
+            Sound sound("assets/music/scream.ogg", 50, 2000);
+            sound.playSound();
+            std::cout << "Volume" << std::endl;
         }
     }
+}
+
+void Desktop::setBackGround()
+{
+    _background = new AssetsLoader<sf::Sprite>("background.png", sf::Vector2f(0, 0), sf::Vector2f(1920, 1080));
+    _toolbar = new AssetsLoader<sf::Sprite>("toolbar.png", sf::Vector2f(0, 990), sf::Vector2f(1920, 1080 / 12));
+    _volume = new AssetsLoader<sf::Sprite>("volume.png", sf::Vector2f(1800, 995), sf::Vector2f(80, 80));
 }

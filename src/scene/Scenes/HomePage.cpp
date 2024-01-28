@@ -10,7 +10,7 @@
 HomePage::HomePage(sf::RenderWindow &window) : _window(window)
 {
     int defaultPaddingTop = 50;
-    float defaultLeft = window.getSize().x / 2 - 500;
+    float defaultLeft = window.getSize().x / 2 - 400;
     sf::RectangleShape rectangle(sf::Vector2f(100.f, 100.f));
     rectangle.setFillColor(sf::Color::Red);
     _font.loadFromFile("assets/Aileron-SemiBold.ttf");
@@ -25,6 +25,7 @@ HomePage::HomePage(sf::RenderWindow &window) : _window(window)
     }
     _background = new AssetsLoader<sf::Sprite>("login_background.png", sf::Vector2f(0, 0), sf::Vector2f(1920, 1080));
     _login = new AssetsLoader<sf::Sprite>("login.png", sf::Vector2f(window.getSize().x / 2 - 250, window.getSize().y / 2 + 100), sf::Vector2f(1920 / 4, 1080 / 5));
+    _bubble = new AssetsLoader<sf::Sprite>("bubble.png", sf::Vector2f(window.getSize().x / 2 - 500, window.getSize().y / 2 - 125 ), sf::Vector2f(1920 / 2, 1080 / 5));
 }
 
 HomePage::~HomePage()
@@ -35,6 +36,7 @@ HomePage::~HomePage()
 void HomePage::render(sf::RenderWindow &window)
 {
     _background->draw(window);
+    _bubble->draw(window);
     _login->draw(window);
     for (int i = 0; i < _dialogs.size(); i++) {
         if (i && !_dialogs[i - 1].isFullyDisplayed())

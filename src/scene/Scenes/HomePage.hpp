@@ -43,6 +43,7 @@ class HomePage: public Scene {
         std::vector<Dialog> _dialogs;
         AssetsLoader<sf::Sprite> *_login;
         SceneManager &_sceneManager = SceneManager::getInstance();
+        AssetsLoader<sf::Sprite> *_bubble;
 };
 
 

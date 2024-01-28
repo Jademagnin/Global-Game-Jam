@@ -26,7 +26,8 @@ Engine::Engine()
 
     // init all scenes
     // Default scene
-    _sceneManager.stageScene(std::make_unique<Desktop>(_window));
+    // _sceneManager.stageScene(std::make_unique<Desktop>(_window));
+    _sceneManager.stageScene(std::make_unique<HomePage>(_window));
     // _sceneManager.stageScene(std::make_unique<Mouse>(_window));
     _sceneManager.setMouseScene(std::make_unique<Mouse>(_window));
     // Secondary scenes

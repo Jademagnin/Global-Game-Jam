@@ -43,6 +43,7 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
             col++;
         }
     }
+    _message = new AssetsLoader<sf::Sprite>("cheat.png", sf::Vector2f(1200, 690), sf::Vector2f(700, 300));
 }
 
 Desktop::~Desktop()
@@ -59,6 +60,8 @@ void Desktop::render(sf::RenderWindow &window)
     _background->draw(window);
     _toolbar->draw(window);
     _volume->draw(window);
+    if (isActif == true)
+        _message->draw(window);
      for (int i = 0; i < _folderNumber; i++) {
         _icon[i]->moveFrame();
     }
@@ -87,7 +90,7 @@ void Desktop::processEvents(sf::Event event)
     static bool isSingleClick = false;
     sf::Vector2i pixelPos = sf::Mouse::getPosition(_window);
 
-    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+       if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         if (!_draggedFolder) {
             for (int i = 0; i < _folderNumber; i++) {
                 if (_icon[i]->checkDrag(pixelPos, _window)) {
@@ -127,6 +130,15 @@ void Desktop::processEvents(sf::Event event)
             Sound sound("assets/music/scream.ogg", 50, 2000);
             sound.playSound();
         }
+    }
+    //if click on message 
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && isActif == true) {
+        if (pixelPos.x >= 1200 && pixelPos.x <= 1900 && pixelPos.y >= 690 && pixelPos.y <= 990)
+        {
+            //stop drawing message
+            isActif = false;
+        }
+
     }
 }
 

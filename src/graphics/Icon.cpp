@@ -27,7 +27,7 @@ std::vector<std::string> formatLabel(std::string label)
     return lines;
 }
 
-Icon::Icon(std::string path, const std::string label, int n_frames) : Sprite(path, n_frames), _hovered(false), _moving(false)
+Icon::Icon(std::string path, const std::string label, std::shared_ptr<Scene> scene,int n_frames) : Sprite(path, n_frames), _hovered(false), _moving(false), _label(label), _scene(scene)
 {
     _text = new TextArray(formatLabel(label), sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + 20), 15, sf::Color::White);
     sprite.setScale(0.2, 0.2);

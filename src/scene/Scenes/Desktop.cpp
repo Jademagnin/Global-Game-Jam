@@ -16,6 +16,7 @@
 #include "../../graphics/AssetsLoader.hpp"
 #include <SFML/Audio.hpp>
 #include "../../music/Music.hpp"
+#include <thread>
 // #include "SFML/
 
 Desktop::Desktop(sf::RenderWindow &window) : _window(window)
@@ -32,7 +33,7 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
     int col = 0;
     setBackGround();
     for (int i = 0; i < _folderNumber; i++) {
-        _icon[i] = new Icon("folder.png", folders[i], 1);
+        _icon[i] = new Icon("folder.png", folders[i], std::make_unique<FileExplorer>(window), 1);
         _pos[i] = sf::Vector2f(50 + (col * 128), 50 + (row * 128));
         _icon[i]->sprite.setScale(0.2, 0.2);
         _icon[i]->setPosition(_pos[i]);
@@ -87,24 +88,22 @@ void Desktop::processEvents(sf::Event event)
     sf::Vector2i pixelPos = sf::Mouse::getPosition(_window);
 
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-        for (int i = 0; i < _folderNumber; i++) {
-            if (_icon[i]->checkDrag(pixelPos, _window)) {
-                _draggedFolder = _icon[i];
-                break;
-            }
-        }   
-        // handle double click events here
+        if (!_draggedFolder) {
+            for (int i = 0; i < _folderNumber; i++) {
+                if (_icon[i]->checkDrag(pixelPos, _window)) {
+                    _draggedFolder = _icon[i];
+                    break;
+                }
+        }
+        }
         if (clickClock.getElapsedTime().asMilliseconds() < 200) {
             isSingleClick = false;
-            LOG("Double click");
-            _sceneManager.stageScene(std::make_unique<FileExplorer>(_window));
+            if (_draggedFolder)
+                _draggedFolder->click(pixelPos, _window);
         } else {
             isSingleClick = true;
             clickClock.restart();
         }
-        forEachIcon([&](Icon* icon) {
-            icon->checkDrag(pixelPos, _window);
-        });
     } else if (event.type == sf::Event::MouseMoved) {
         if (_draggedFolder != nullptr) {
             _draggedFolder->checkMove(pixelPos, _window);
@@ -113,9 +112,11 @@ void Desktop::processEvents(sf::Event event)
                 _icon[i]->checkHover(pixelPos);
         }
     } else if (event.type == sf::Event::MouseButtonReleased) {
-        forEachIcon([&](Icon* icon) {
-            icon->checkDrop(pixelPos, _window);
-        });
+        if (_draggedFolder != nullptr) {
+            _draggedFolder->checkDrop(pixelPos, _window);
+            _draggedFolder = nullptr;
+        }
+
     }
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
         LOG("Right click");

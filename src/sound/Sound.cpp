@@ -7,7 +7,14 @@
 
 #include "Sound.hpp"
 
+#include <thread>
+
+void Sound::playSoundThreaded() {
+    _sound.play();
+    sf::sleep(sf::milliseconds(_delay));
+}
+
 void Sound::playSound() {
-    this->_sound.play();
-    sf::sleep(sf::milliseconds(this->_delay));
+    std::thread t(&Sound::playSound, this);
+    t.detach();
 }

@@ -24,7 +24,7 @@ HomePage::HomePage(sf::RenderWindow &window) : _window(window)
         defaultPaddingTop -= 50;
     }
     _background = new AssetsLoader<sf::Sprite>("login_background.png", sf::Vector2f(0, 0), sf::Vector2f(1920, 1080));
-    _login = new AssetsLoader<sf::Sprite>("login.png", sf::Vector2f(0, 0), sf::Vector2f(1920 / 2, 1080 / 2));
+    _login = new AssetsLoader<sf::Sprite>("login.png", sf::Vector2f(window.getSize().x / 2 - 250, window.getSize().y / 2 + 100), sf::Vector2f(1920 / 4, 1080 / 4));
 }
 
 HomePage::~HomePage()

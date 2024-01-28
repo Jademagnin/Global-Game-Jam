@@ -113,9 +113,10 @@ void Desktop::processEvents(sf::Event event)
                 _icon[i]->checkHover(pixelPos);
         }
     } else if (event.type == sf::Event::MouseButtonReleased) {
-        forEachIcon([&](Icon* icon) {
-            icon->checkDrop(pixelPos, _window);
-        });
+        if (_draggedFolder != nullptr) {
+            _draggedFolder->checkDrop(pixelPos, _window);
+            _draggedFolder = nullptr;
+        }
     }
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
         LOG("Right click");

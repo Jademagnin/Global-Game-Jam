@@ -12,6 +12,7 @@
 #include "../scene/Scenes/WhiteRectangle.hpp"
 #include "../scene/Scenes/BlackRectangle.hpp"
 #include "../scene/Scenes/Desktop.hpp"
+#include "../utils/Mouse.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -25,7 +26,7 @@ Engine::Engine()
     // init all scenes
     // Default scene
     _sceneManager.stageScene(std::make_unique<Desktop>(_window));
-
+    _sceneManager.stageScene(std::make_unique<Mouse>(_window));
     // Secondary scenes
     _sceneManager.unstageScene(std::make_unique<WhiteRectangle>());
     _sceneManager.unstageScene(std::make_unique<BlackRectangle>());

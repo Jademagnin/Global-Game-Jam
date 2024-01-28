@@ -7,6 +7,7 @@
 
 #include "Desktop.hpp"
 #include "WhiteRectangle.hpp"
+#include "FileExplorer.hpp"
 #include "../../utils/Logging.hpp"
 #include <iostream>
 #include <vector>
@@ -86,9 +87,20 @@ void Desktop::forEachIcon(Funcs... callbacks)
 
 void Desktop::processEvents(sf::Event event)
 {
-    sf::Vector2i pixelPos = sf::Mouse::getPosition(_window); // window coordinates
+    static sf::Clock clickClock;
+    static bool isSingleClick = false;
+    sf::Vector2i pixelPos = sf::Mouse::getPosition(_window);
 
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+        // handle double click events here
+        if (clickClock.getElapsedTime().asMilliseconds() < 200) {
+            isSingleClick = false;
+            LOG("Double click");
+            _sceneManager.stageScene(std::make_unique<FileExplorer>(_window));
+        } else {
+            isSingleClick = true;
+            clickClock.restart();
+        }
         forEachIcon([&](Icon* icon) {
             icon->checkDrag(pixelPos, _window);
         });

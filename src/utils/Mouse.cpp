@@ -31,4 +31,3 @@ void Mouse::processEvents(sf::Event event) {
 void Mouse::render(sf::RenderWindow &window) {
     window.draw(_mouseSprite);
 }
-

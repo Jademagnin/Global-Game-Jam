@@ -35,6 +35,8 @@ class FileExplorer: public Scene {
         AssetsLoader<sf::Sprite>* _image3;
         AssetsLoader<sf::Sprite>* _image4;
         AssetsLoader<sf::Sprite>* _image5;
+        AssetsLoader<sf::Sprite>* _message;
+        bool isActif = true;
 };
 
 #endif

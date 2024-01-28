@@ -27,7 +27,7 @@ class Desktop : public Scene {
             void forEachIcon(Funcs... callbacks);
             void InitTextBelow();
             void setBackGround();
-            
+
         private:
             Icon* _icon[21];
             sf::Vector2f _pos[21];
@@ -35,6 +35,8 @@ class Desktop : public Scene {
             Text* _text[21];
             YmlParser _yml;
             AssetsLoader<sf::Sprite>* _background;
+            AssetsLoader<sf::Sprite>* _toolbar;
+            AssetsLoader<sf::Sprite>* _volume;
 
             SceneManager& _sceneManager = SceneManager::getInstance();
     };

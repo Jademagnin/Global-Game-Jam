@@ -5,8 +5,9 @@
 // ** Sound
 // */
 
-// #include "Sound.hpp"
+#include "Sound.hpp"
 
-// void Sound::playSound() {
-//     this->_sound.play();
-// }
+void Sound::playSound() {
+    this->_sound.play();
+    sf::sleep(sf::milliseconds(this->_delay));
+}

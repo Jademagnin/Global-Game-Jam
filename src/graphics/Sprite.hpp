@@ -18,6 +18,8 @@ class Sprite {
         void hover();
         void moveFrame();
         sf::Sprite operator*() { return sprite; }
+        void render(sf::RenderWindow &window) { window.draw(sprite); }
+        void setPosition(sf::Vector2f pos) { sprite.setPosition(pos); }
     public:
         sf::Texture texture;
         sf::Sprite sprite;

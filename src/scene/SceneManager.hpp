@@ -27,6 +27,8 @@ class SceneManager
         void unstageScene(std::shared_ptr<Scene> scene);
         std::vector<std::shared_ptr<Scene>> getStagedScenes() const { return _stagedScenes; };
         std::vector<std::shared_ptr<Scene>> getUnstagedScenes() const { return _unstagedScenes; };
+        void setMouseScene(std::shared_ptr<Scene> scene) { _mouseScene = scene; };
+        std::shared_ptr<Scene> getMouseScene() const { return _mouseScene; };
 
     private:
         SceneManager() {};
@@ -35,6 +37,7 @@ class SceneManager
 
         std::vector<std::shared_ptr<Scene>> _stagedScenes;
         std::vector<std::shared_ptr<Scene>> _unstagedScenes;
+        std::shared_ptr<Scene> _mouseScene;
 };
 
 // class UniqueSceneManager

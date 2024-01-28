@@ -12,6 +12,7 @@ Mouse::Mouse(sf::RenderWindow &window) : _window(window) {
     this->_mousePressed = new AssetsLoader<sf::Sprite>("assets/mouse_event.png", sf::Vector2f(0, 0), sf::Vector2f(75, 75));
     this->_mouseSprite = this->_mouse->getSprite();
     this->_mouseTexture = this->_mouse->getTexture();
+    this->_mouseSprite.setOrigin(this->_mouseSprite.getGlobalBounds().width / 2, this->_mouseSprite.getGlobalBounds().height / 2);
     window.setMouseCursorVisible(false);
 }
 
@@ -31,4 +32,3 @@ void Mouse::processEvents(sf::Event event) {
 void Mouse::render(sf::RenderWindow &window) {
     window.draw(_mouseSprite);
 }
-

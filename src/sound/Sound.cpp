@@ -7,7 +7,8 @@
 
 #include "Sound.hpp"
 
+
 void Sound::playSound() {
-    this->_sound.play();
-    sf::sleep(sf::milliseconds(this->_delay));
+        _sound.play();
+    sf::sleep(sf::milliseconds(_delay));
 }

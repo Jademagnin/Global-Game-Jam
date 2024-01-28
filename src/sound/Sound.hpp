@@ -24,6 +24,7 @@ class Sound {
         }
 
         void playSound();
+        void playSoundThreaded();
 
     private:
         sf::SoundBuffer _buffer;

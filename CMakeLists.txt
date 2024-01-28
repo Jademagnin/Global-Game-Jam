@@ -10,3 +10,4 @@ add_executable(jam ${SOURCE_FILES})
 
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 target_link_libraries(jam sfml-graphics sfml-audio yaml-cpp)
+target_compile_options(jam PRIVATE -g)

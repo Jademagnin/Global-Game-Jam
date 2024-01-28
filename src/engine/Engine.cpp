@@ -26,8 +26,12 @@ Engine::Engine()
 
     // init all scenes
     // Default scene
-    // _sceneManager.stageScene(std::make_unique<Desktop>(_window));
-    _sceneManager.stageScene(std::make_unique<HomePage>(_window));
+    _sceneManager.stageScene(std::make_unique<Desktop>(_window));
+    // _sceneManager.stageScene(std::make_unique<Mouse>(_window));
+    _sceneManager.setMouseScene(std::make_unique<Mouse>(_window));
+    // Secondary scenes
+    _sceneManager.unstageScene(std::make_unique<WhiteRectangle>());
+    _sceneManager.unstageScene(std::make_unique<BlackRectangle>());
 
     // // Secondary scenes
     // _sceneManager.unstageScene(std::make_unique<WhiteRectangle>());
@@ -69,11 +73,11 @@ void Engine::processEvents()
             _window.close();
         if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
             _window.close();
-    }
-
-    // Loop into staged scenes and process events
-    for (auto& scene : _sceneManager.getStagedScenes()) {
-        scene->processEvents(event);
+        // feur
+        for (auto& scene : _sceneManager.getStagedScenes()) {
+            scene->processEvents(event);
+        }
+        _sceneManager.getMouseScene()->processEvents(event);
     }
 
 }
@@ -86,6 +90,7 @@ void Engine::render()
     for (auto& scene : sceneManager.getStagedScenes()) {
         scene->render(_window);
     }
+    _sceneManager.getMouseScene()->render(_window);
 
     _window.display();
 }

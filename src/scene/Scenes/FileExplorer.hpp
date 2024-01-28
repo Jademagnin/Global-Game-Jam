@@ -11,12 +11,12 @@
 #include "../Scene.hpp"
 #include "../../graphics/Icon.hpp"
 #include "../../graphics/AssetsLoader.hpp"
-#include "../../graphics/AssetsLoader.cpp"
+#include "../../parsing/YmlParser.hpp"
 #include <functional>
 
 class FileExplorer: public Scene {
     public:
-        FileExplorer(sf::RenderWindow &window);
+        FileExplorer(sf::RenderWindow &window, std::string &path);
         ~FileExplorer();
         void render(sf::RenderWindow &window);
         void processEvents(sf::Event event);
@@ -27,6 +27,8 @@ class FileExplorer: public Scene {
         bool _isOpen = false;
         int _fileId = 0;
         sf::RenderWindow &_window;
+        YmlParser _yml;
+        Text **_text;
 };
 
 #endif

@@ -24,6 +24,11 @@ HomePage::HomePage(sf::RenderWindow &window) : _window(window)
         defaultPaddingTop -= 50;
     }
     _background = new AssetsLoader<sf::Sprite>("login_background.png", sf::Vector2f(0, 0), sf::Vector2f(1920, 1080));
+    //init button
+        // Button(const sf::Rect<float>& position, const std::function<void()>& onClick, const std::string& label = "Button")
+    _button = new Button(sf::Rect<float>(sf::Vector2f(100, 100), sf::Vector2f(100, 100)), []() {
+        std::cout << "Button clicked" << std::endl;
+    }, "Button");
 }
 
 HomePage::~HomePage()

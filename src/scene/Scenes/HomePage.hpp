@@ -15,6 +15,7 @@
 #include "../../graphics/Icon.hpp"
 #include "../../graphics/AssetsLoader.hpp"
 #include "../../graphics/AssetsLoader.cpp"
+#include "../../button/button.hpp"
 #include "../../dialog/dialog.hpp"
 #include <functional>
 #include <vector>
@@ -36,6 +37,7 @@ class HomePage: public Scene {
         Dialog *_dialog;
         Dialog *_dialog2;
         AssetsLoader<sf::Sprite> *_background;
+        Button *_button;
         std::vector<Dialog> _dialogs;
 };
 

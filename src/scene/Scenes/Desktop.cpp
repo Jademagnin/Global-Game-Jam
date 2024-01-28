@@ -78,22 +78,18 @@ void Desktop::processEvents(sf::Event event)
                 _draggedFolder = _icon[i];
                 break;
             }
-        }
+        }   
     } else if (event.type == sf::Event::MouseMoved) {
         if (_draggedFolder != nullptr) {
             _draggedFolder->checkMove(pixelPos, _window);
         } else {
-            for (int i = 0; i < _folderNumber; i++) {
+            for (int i = 0; i < _folderNumber; i++)
                 _icon[i]->checkHover(pixelPos);
-            }
         }
     } else if (event.type == sf::Event::MouseButtonReleased) {
         if (_draggedFolder != nullptr) {
             _draggedFolder->setMoving(false);
             _draggedFolder = nullptr;
         }
-    }
-    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Right) {
-        std::cout << "Right click" << std::endl;
     }
 }

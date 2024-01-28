@@ -12,6 +12,7 @@
 #include "../../graphics/Icon.hpp"
 #include "../../graphics/AssetsLoader.hpp"
 #include "../../parsing/YmlParser.hpp"
+#include "../../graphics/AssetsLoader.hpp"
 #include <functional>
 
 class FileExplorer: public Scene {
@@ -29,6 +30,11 @@ class FileExplorer: public Scene {
         sf::RenderWindow &_window;
         YmlParser _yml;
         Text **_text;
+        AssetsLoader<sf::Sprite>* _image1;
+        AssetsLoader<sf::Sprite>* _image2;
+        AssetsLoader<sf::Sprite>* _image3;
+        AssetsLoader<sf::Sprite>* _image4;
+        AssetsLoader<sf::Sprite>* _image5;
 };
 
 #endif

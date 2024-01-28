@@ -19,7 +19,7 @@
 #include <thread>
 // #include "SFML/
 
-Desktop::Desktop(sf::RenderWindow &window) : _window(window)
+Desktop::Desktop(sf::RenderWindow &window) : _window(window), isActif(0)
 {
     //string is the name of the file, int is the number of frames
     _folderNumber = this->_yml.getNbOfFolderDesktop();
@@ -44,6 +44,7 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window)
         }
     }
     _message = new AssetsLoader<sf::Sprite>("cheat.png", sf::Vector2f(1200, 690), sf::Vector2f(700, 300));
+    _message2 = new AssetsLoader<sf::Sprite>("wife.png", sf::Vector2f(1200, 690), sf::Vector2f(700, 300));
 }
 
 Desktop::~Desktop()
@@ -53,6 +54,8 @@ Desktop::~Desktop()
     }
     delete[] _icon;
     delete _background;
+    delete _message2;
+    delete _message;
 }
 
 void Desktop::render(sf::RenderWindow &window)
@@ -60,8 +63,12 @@ void Desktop::render(sf::RenderWindow &window)
     _background->draw(window);
     _toolbar->draw(window);
     _volume->draw(window);
-    if (isActif == true)
+    // if (isActif == true)
+    //     _message->draw(window);
+    if (isActif == 0)
         _message->draw(window);
+    if (isActif == 1)
+        _message2->draw(window);
      for (int i = 0; i < _folderNumber; i++) {
         _icon[i]->moveFrame();
     }
@@ -132,11 +139,11 @@ void Desktop::processEvents(sf::Event event)
         }
     }
     //if click on message 
-    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && isActif == true) {
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         if (pixelPos.x >= 1200 && pixelPos.x <= 1900 && pixelPos.y >= 690 && pixelPos.y <= 990)
         {
             //stop drawing message
-            isActif = false;
+            isActif += 1;
         }
 
     }

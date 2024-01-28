@@ -40,7 +40,9 @@
             AssetsLoader<sf::Sprite>* _toolbar;
             AssetsLoader<sf::Sprite>* _volume;
             AssetsLoader<sf::Sprite>* _message;
-            bool isActif = true;
+            // bool isActif = true;
+            AssetsLoader<sf::Sprite>* _message2;
+            int isActif;
 
             SceneManager& _sceneManager = SceneManager::getInstance();
     };

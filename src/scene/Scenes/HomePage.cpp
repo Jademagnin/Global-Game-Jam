@@ -16,8 +16,8 @@ HomePage::HomePage(sf::RenderWindow &window) : _window(window)
     _font.loadFromFile("assets/Aileron-SemiBold.ttf");
 
     std::vector<std::string> dialogText = {
-        "J'ai trouve ce PC par terre, je me demande a qui il appartient...",
-        "Je devrais peut-etre essayer de le deverrouiller.",
+        "Un homme m'a donne ce PC et m'a demande de recuperer des dossiers",
+        "importants ... Je devrais commencer par le deverrouiller.",
     };
     for (int i = 0; i < dialogText.size(); i++) {
         _dialogs.push_back(Dialog(dialogText[i], _font, sf::Vector2f(defaultLeft, window.getSize().y / 2 - defaultPaddingTop), sf::Color::Black));

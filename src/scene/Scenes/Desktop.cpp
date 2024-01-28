@@ -43,6 +43,7 @@ Desktop::Desktop(sf::RenderWindow &window) : _window(window), isActif(0)
             col++;
         }
     }
+    ChangeIcon();
     _message = new AssetsLoader<sf::Sprite>("cheat.png", sf::Vector2f(1200, 690), sf::Vector2f(700, 300));
     _message2 = new AssetsLoader<sf::Sprite>("wife.png", sf::Vector2f(1200, 690), sf::Vector2f(700, 300));
 }
@@ -56,6 +57,38 @@ Desktop::~Desktop()
     delete _background;
     delete _message2;
     delete _message;
+}
+
+void Desktop::ChangeIcon()
+{
+    std::vector<std::string> folders = this->_yml.getDesktop();
+    int col = 0;
+    int row = 0;
+    _icon[0] = new Icon("clippy.png", folders[0], std::make_unique<FileExplorer>(_window, folders[0]), 1);
+    _icon[0]->sprite.setScale(0.2, 0.2);
+    _icon[0]->setPosition(_pos[0]);
+
+    _icon[1] = new Icon("download/download.png", folders[1], std::make_unique<FileExplorer>(_window, folders[1]), 1);
+    _icon[1]->sprite.setScale(0.2, 0.2);
+    _icon[1]->setPosition(_pos[1]);
+
+    _icon[2] = new Icon("game_icon.png", folders[2], std::make_unique<FileExplorer>(_window, folders[2]), 1);
+    _icon[2]->sprite.setScale(0.2, 0.2);
+    _icon[2]->setPosition(_pos[2]);
+
+    _icon[3] = new Icon("/corbeille/bin.png", folders[3], std::make_unique<FileExplorer>(_window, folders[3]), 1);
+    _icon[3]->sprite.setScale(0.2, 0.2);
+    _icon[3]->setPosition(_pos[3]);
+
+    _icon[4] = new Icon("pictures.png", folders[4], std::make_unique<FileExplorer>(_window, folders[4]), 1);
+    _icon[4]->sprite.setScale(0.2, 0.2);
+    _icon[4]->setPosition(_pos[4]);
+
+    _icon[5] = new Icon("firefox_icon.png", folders[5], std::make_unique<FileExplorer>(_window, folders[5]), 1);
+    _icon[5]->sprite.setScale(0.2, 0.2);
+    _icon[5]->setPosition(_pos[5]);
+
+
 }
 
 void Desktop::render(sf::RenderWindow &window)

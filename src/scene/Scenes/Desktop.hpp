@@ -27,6 +27,7 @@
             void forEachIcon(Funcs... callbacks);
             void InitTextBelow();
             void setBackGround();
+            void ChangeIcon();
 
         private:
             YmlParser _yml;

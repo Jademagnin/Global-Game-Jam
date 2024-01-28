@@ -12,6 +12,7 @@
 #include "../scene/Scenes/WhiteRectangle.hpp"
 #include "../scene/Scenes/BlackRectangle.hpp"
 #include "../scene/Scenes/Desktop.hpp"
+#include "../scene/Scenes/HomePage.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -24,11 +25,12 @@ Engine::Engine()
 
     // init all scenes
     // Default scene
-    _sceneManager.stageScene(std::make_unique<Desktop>(_window));
+    // _sceneManager.stageScene(std::make_unique<Desktop>(_window));
+    _sceneManager.stageScene(std::make_unique<HomePage>(_window));
 
-    // Secondary scenes
-    _sceneManager.unstageScene(std::make_unique<WhiteRectangle>());
-    _sceneManager.unstageScene(std::make_unique<BlackRectangle>());
+    // // Secondary scenes
+    // _sceneManager.unstageScene(std::make_unique<WhiteRectangle>());
+    // _sceneManager.unstageScene(std::make_unique<BlackRectangle>());
 
     LOG("Engine initialized successfully.");
 }
@@ -62,6 +64,8 @@ void Engine::processEvents()
     while (_window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
+            _window.close();
+        if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
             _window.close();
     }
 

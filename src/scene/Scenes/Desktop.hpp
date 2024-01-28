@@ -27,7 +27,7 @@ class Desktop : public Scene {
             void forEachIcon(Funcs... callbacks);
             void InitTextBelow();
             void setBackGround();
-            
+
         private:
             Icon* _icon[21];
             sf::Vector2f _pos[21];

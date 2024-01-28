@@ -39,6 +39,8 @@
             AssetsLoader<sf::Sprite>* _background;
             AssetsLoader<sf::Sprite>* _toolbar;
             AssetsLoader<sf::Sprite>* _volume;
+            AssetsLoader<sf::Sprite>* _message;
+            bool isActif = true;
 
             SceneManager& _sceneManager = SceneManager::getInstance();
     };

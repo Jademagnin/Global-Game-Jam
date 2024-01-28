@@ -8,6 +8,10 @@
 #include "FileExplorer.hpp"
 #include "../../parsing/YmlParser.hpp"
 #include "../../text/Text.hpp"
+#include "../../graphics/AssetsLoader.hpp"
+#include <iostream>
+#include <vector>
+#include <map>
 
 FileExplorer::FileExplorer(sf::RenderWindow &window, std::string &path) : _window(window)
 {
@@ -35,6 +39,7 @@ FileExplorer::FileExplorer(sf::RenderWindow &window, std::string &path) : _windo
     _image3 = new AssetsLoader<sf::Sprite>("president.png", sf::Vector2f(350, 400), sf::Vector2f(100, 100));
     _image4 = new AssetsLoader<sf::Sprite>("user.png", sf::Vector2f(850, 400), sf::Vector2f(100, 100));
     _image5 = new AssetsLoader<sf::Sprite>("game.png", sf::Vector2f(350, 600), sf::Vector2f(100, 100));
+    _message = new AssetsLoader<sf::Sprite>("son.png", sf::Vector2f(1200, 690), sf::Vector2f(700, 300));
 }
 
 FileExplorer::~FileExplorer()
@@ -58,13 +63,24 @@ void FileExplorer::render(sf::RenderWindow &window)
     _image3->draw(window);
     _image4->draw(window);
     _image5->draw(window);
+    if (isActif == true)
+        _message->draw(window);
 }
 
 void FileExplorer::processEvents(sf::Event event) {
+    sf::Vector2i pixelPos = sf::Mouse::getPosition(_window);
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-        sf::Vector2i pixelPos = sf::Mouse::getPosition(_window);
         if (_closeButton.getGlobalBounds().contains(pixelPos.x, pixelPos.y)) {
             _sceneManager.popScene();
         }
+    }
+
+      if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && isActif == true) {
+        if (pixelPos.x >= 1200 && pixelPos.x <= 1900 && pixelPos.y >= 690 && pixelPos.y <= 990)
+        {
+            //stop drawing message
+            isActif = false;
+        }
+
     }
 }

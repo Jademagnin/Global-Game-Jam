@@ -21,7 +21,7 @@ class SceneManager
             return instance;
         }
         void switchScene(std::shared_ptr<Scene> scene);
-        void popScene(std::shared_ptr<Scene> scene);
+        void popScene();
         Scene* getTopScene();
         void stageScene(std::shared_ptr<Scene> scene);
         void unstageScene(std::shared_ptr<Scene> scene);

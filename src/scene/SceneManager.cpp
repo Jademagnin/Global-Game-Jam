@@ -7,12 +7,9 @@
 
 #include "SceneManager.hpp"
 
-void SceneManager::popScene(std::shared_ptr<Scene> scene)
-{
-    auto it = std::find(_stagedScenes.begin(), _stagedScenes.end(), scene);
-
-    if (it != _stagedScenes.end()) {
-        _stagedScenes.erase(it);
+void SceneManager::popScene() {
+    if (!_stagedScenes.empty()) {
+        _stagedScenes.pop_back();
     }
 }
 

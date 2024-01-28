@@ -48,7 +48,7 @@ desktop:
               - type: image
                 name: copain2.jpg
               - type: image
-                name: copain3.jpg            
+                name: copain3.jpg
       - type: document
         name: CV
       - type: document

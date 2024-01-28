@@ -26,11 +26,19 @@ FileExplorer::FileExplorer(sf::RenderWindow &window, std::string &path) : _windo
         }
         i++;
     }
+
+    _closeButton.setSize(sf::Vector2f(50, 50));
+    _closeButton.setFillColor(sf::Color::Transparent);
+    _closeButton.setPosition(sf::Vector2f(1015, 40));
 }
 
 FileExplorer::~FileExplorer()
 {
-
+    delete _explorer;
+    for (int i = 0; i < 5; i++) {
+        delete _text[i];
+    }
+    delete[] _text;
 }
 
 void FileExplorer::render(sf::RenderWindow &window)
@@ -39,9 +47,14 @@ void FileExplorer::render(sf::RenderWindow &window)
     for (int i = 0; i < 5; i++) {
         _text[i]->draw(window);
     }
+    window.draw(_closeButton);
 }
 
 void FileExplorer::processEvents(sf::Event event) {
-
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+        sf::Vector2i pixelPos = sf::Mouse::getPosition(_window);
+        if (_closeButton.getGlobalBounds().contains(pixelPos.x, pixelPos.y)) {
+            _sceneManager.popScene();
+        }
+    }
 }
-

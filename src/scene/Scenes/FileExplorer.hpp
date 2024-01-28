@@ -24,11 +24,11 @@ class FileExplorer: public Scene {
     protected:
     private:
         AssetsLoader<sf::Sprite>* _explorer;
-        bool _isOpen = false;
-        int _fileId = 0;
         sf::RenderWindow &_window;
         YmlParser _yml;
         Text **_text;
+        sf::RectangleShape _closeButton;
+        SceneManager& _sceneManager = SceneManager::getInstance();
 };
 
 #endif

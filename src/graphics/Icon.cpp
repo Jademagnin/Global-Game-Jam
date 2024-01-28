@@ -7,9 +7,29 @@
 
 #include "Icon.hpp"
 #include <iostream>
+#include "../text/Text.hpp"
 
-Icon::Icon(std::string path, Text *text, int n_frames) : Sprite(path, n_frames), _hovered(false), _moving(false), _text(text)
+std::vector<std::string> formatLabel(std::string label)
 {
+    std::vector<std::string> lines;
+    std::string line = "";
+    int i = 0;
+    while (i < label.size()) {
+        if (label[i] == ' ') {
+            lines.push_back(line);
+            line = "";
+        } else {
+            line += label[i];
+        }
+        i++;
+    }
+    lines.push_back(line);
+    return lines;
+}
+
+Icon::Icon(std::string path, const std::string label, int n_frames) : Sprite(path, n_frames), _hovered(false), _moving(false)
+{
+    _text = new TextArray(formatLabel(label), sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y + 20), 15, sf::Color::White);
     sprite.setScale(0.2, 0.2);
 }
 
@@ -21,27 +41,27 @@ void Icon::checkHover(sf::Vector2i mousePos)
     float halfWidth = rect.width / 2;
     float halfHeight = rect.height / 2;
     if (mousePos.x >= iconPos.x - halfWidth && mousePos.x <= iconPos.x + halfWidth &&
-        mousePos.y >= iconPos.y - halfHeight && mousePos.y <= iconPos.y + halfHeight) {
+        mousePos.y >= iconPos.y - halfHeight + 20 && mousePos.y <= iconPos.y + halfHeight) {
         hover(true);
     } else {
         hover(false);
     }
 }
 
-void Icon::checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window)
+bool Icon::checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window)
 {
-    (void)mousePos;
-    if (sprite.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)))) {
+    if (sprite.getGlobalBounds().contains(window.mapPixelToCoords(mousePos))) {
         _moving = true;
+        return true;
     }
+    return false;
 }
 
 void Icon::checkMove(sf::Vector2i mousePos, sf::RenderWindow &window)
 {
     (void)window;
     if (_moving) {
-        sprite.setPosition(mousePos.x, mousePos.y);
-        _text->setPosition(sf::Vector2f(mousePos.x - 30, mousePos.y + 50));
+        this->setPosition(window.mapPixelToCoords(mousePos));
     }
 }
 
@@ -49,8 +69,7 @@ void Icon::checkDrop(sf::Vector2i mousePos, sf::RenderWindow &window)
 {
     (void)window;
     if (_moving) {
-        sprite.setPosition(mousePos.x, mousePos.y);
-        _text->setPosition(sf::Vector2f(mousePos.x - 30, mousePos.y + 50));
+        this->setPosition(window.mapPixelToCoords(mousePos));
         _moving = false;
     }
 }

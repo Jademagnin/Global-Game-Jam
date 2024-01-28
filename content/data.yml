@@ -14,7 +14,7 @@ desktop:
         name: Photos
         obstacle: ACCELERATED_MOUSE
         action: 
-          open: CHAT_NARRATOR,
+          open: CHAT_NARRATOR
           text: "Ah, non, c'est pas là !"
         files:
           - type: folder
@@ -62,7 +62,7 @@ desktop:
       - type: folder
         name: Vacances avec Giselle
   - type: folder
-    name: Téléchargements
+    name: Telechargements
     action:
       open: CHAT_NARRATOR
       text: "... Je préfère ne pas vous dire ce que j'ai téléchargé ici ..."
@@ -109,7 +109,7 @@ desktop:
   - type: folder
     name: Contrats
   - type: folder
-    name: Assemblés Générales
+    name: Assembles Generales
   - type: folder
     name: "49.3"
   - type: folder

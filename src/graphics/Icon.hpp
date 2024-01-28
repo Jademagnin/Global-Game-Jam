@@ -15,21 +15,31 @@
     
 class Icon : public Sprite {
     public:
-        Icon(std::string path, Text *text, int n_frames = 1);
+        Icon(std::string path, const std::string label, int n_frames = 1);
         ~Icon() = default;
         void hover(bool hovered);
         void checkHover(sf::Vector2i mousePos);
-        void checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window);
+        bool checkDrag(sf::Vector2i mousePos, sf::RenderWindow &window);
         void checkDrop(sf::Vector2i mousePos, sf::RenderWindow &window);
         void checkMove(sf::Vector2i mousePos, sf::RenderWindow &window);
+        void setHovered(bool hovered) { _hovered = hovered; };
+        void setMoving(bool moving) { _moving = moving; };
+        void setPosition(sf::Vector2f pos) {
+            sprite.setPosition(pos);
+            _text->setPosition(sf::Vector2f(pos.x, pos.y + 42.5));
+        };
         void moveFrame() {
             if (_hovered)
                 Sprite::moveFrame();
         }
+        void render(sf::RenderWindow &window) {
+            Sprite::render(window);
+            _text->draw(window);
+        }
     private:
         bool _hovered;
         bool _moving;
-        Text *_text;
+        TextArray *_text;
 };
     
 #endif /* _ICON_HPP_ */

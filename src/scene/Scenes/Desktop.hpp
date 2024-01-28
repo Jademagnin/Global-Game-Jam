@@ -17,7 +17,7 @@
 
     #include <functional>
 
-class Desktop : public Scene {
+    class Desktop : public Scene {
         public:
             Desktop(sf::RenderWindow &window);
             ~Desktop();
@@ -29,11 +29,13 @@ class Desktop : public Scene {
             void setBackGround();
 
         private:
-            Icon* _icon[21];
-            sf::Vector2f _pos[21];
-            sf::RenderWindow &_window;
-            Text* _text[21];
             YmlParser _yml;
+            Icon** _icon;
+            sf::Vector2f *_pos;
+            sf::RenderWindow &_window;
+            int _folderNumber;
+            Icon* _hoveredFolder = nullptr;
+            Icon* _draggedFolder = nullptr;
             AssetsLoader<sf::Sprite>* _background;
             AssetsLoader<sf::Sprite>* _toolbar;
             AssetsLoader<sf::Sprite>* _volume;

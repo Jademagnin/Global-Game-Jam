@@ -25,6 +25,10 @@ HomePage::HomePage(sf::RenderWindow &window) : _window(window)
     }
     _background = new AssetsLoader<sf::Sprite>("login_background.png", sf::Vector2f(0, 0), sf::Vector2f(1920, 1080));
     _login = new AssetsLoader<sf::Sprite>("login.png", sf::Vector2f(window.getSize().x / 2 - 250, window.getSize().y / 2 + 100), sf::Vector2f(1920 / 4, 1080 / 5));
+    //  Button(const sf::Rect<float>& position, const std::function<void()>& onClick, const std::string& label = "Button")
+    _button = new Button(sf::Rect<float>(window.getSize().x / 2 - 250, window.getSize().y / 2 + 100, 1920 / 4, 1080 / 5), [this](){
+        this->_window.close();
+    }, "Login");
 }
 
 HomePage::~HomePage()
@@ -45,5 +49,10 @@ void HomePage::render(sf::RenderWindow &window)
 
 void HomePage::processEvents(sf::Event event)
 {
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.x >= _button->getPosition().left && event.mouseButton.x <= _button->getPosition().left + _button->getPosition().width && event.mouseButton.y >= _button->getPosition().top && event.mouseButton.y <= _button->getPosition().top + _button->getPosition().height) {
+        if (event.mouseButton.button == sf::Mouse::Left) {
+            _button->clicked();
+        }
+    }
 
 }

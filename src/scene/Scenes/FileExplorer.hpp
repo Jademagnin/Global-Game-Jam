@@ -14,6 +14,8 @@
 #include "../../parsing/YmlParser.hpp"
 #include "../../graphics/AssetsLoader.hpp"
 #include <functional>
+#include "../../scene/SceneManager.hpp"
+#include "ImageViewer.hpp"
 
 class FileExplorer: public Scene {
     public:
@@ -37,6 +39,7 @@ class FileExplorer: public Scene {
         AssetsLoader<sf::Sprite>* _image5;
         AssetsLoader<sf::Sprite>* _message;
         bool isActif = true;
+        std::string _path;
 };
 
 #endif

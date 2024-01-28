@@ -20,6 +20,7 @@ template<typename T>
 class AssetsLoader {
 public:
     AssetsLoader(const std::string& filename, const sf::Vector2f& position, const sf::Vector2f& size) {
+        this->filename = filename;
         std::string path = findFile(filename);
         if (!texture.loadFromFile(path)) {
             std::cout << "Error loading texture" << std::endl;
@@ -68,10 +69,12 @@ public:
     T getSprite() { return sprite; }
 
     sf::Texture getTexture() { return texture; }
+    std::string getFilename() { return filename; }
 
 private:
     sf::Texture texture;
     T sprite;
+    std::string filename;
 };
 
 #endif /* !ASSETSLOADER_HPP_ */

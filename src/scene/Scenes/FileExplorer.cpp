@@ -73,6 +73,32 @@ void FileExplorer::processEvents(sf::Event event) {
         if (_closeButton.getGlobalBounds().contains(pixelPos.x, pixelPos.y)) {
             _sceneManager.popScene();
         }
+
+        if (pixelPos.x >= 350 && pixelPos.x <= 450 && pixelPos.y >= 200 && pixelPos.y <= 300)
+        {
+            _path = _image1->getFilename();
+            _sceneManager.stageScene(std::make_unique<ImageViewer>(_window, _path));
+        }
+        if (pixelPos.x >= 850 && pixelPos.x <= 950 && pixelPos.y >= 200 && pixelPos.y <= 300)
+        {
+            _path = _image2->getFilename();
+            _sceneManager.stageScene(std::make_unique<ImageViewer>(_window, _path));
+        }
+        if (pixelPos.x >= 350 && pixelPos.x <= 450 && pixelPos.y >= 400 && pixelPos.y <= 500)
+        {
+            _path = _image3->getFilename();
+            _sceneManager.stageScene(std::make_unique<ImageViewer>(_window, _path));
+        }
+        if (pixelPos.x >= 850 && pixelPos.x <= 950 && pixelPos.y >= 400 && pixelPos.y <= 500)
+        {
+            _path = _image4->getFilename();
+            _sceneManager.stageScene(std::make_unique<ImageViewer>(_window, _path));
+        }
+        if (pixelPos.x >= 350 && pixelPos.x <= 450 && pixelPos.y >= 600 && pixelPos.y <= 700)
+        {
+            _path = _image5->getFilename();
+            _sceneManager.stageScene(std::make_unique<ImageViewer>(_window, _path));
+        }
     }
 
       if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left && isActif == true) {

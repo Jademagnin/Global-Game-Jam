@@ -17,6 +17,8 @@ ImageViewer::ImageViewer(sf::RenderWindow &window, const std::string &path) : _i
 
 ImageViewer::~ImageViewer()
 {
+    delete _image;
+    delete _cross;
 }
 
 void ImageViewer::render(sf::RenderWindow &window) {

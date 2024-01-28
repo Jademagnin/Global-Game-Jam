@@ -18,10 +18,8 @@ Sprite::Sprite(std::string path, int n_frames)
         exit(84);
     }
     sprite.setTexture(texture);
-    std::cout << "texture size: " << texture.getSize().x << ", " << texture.getSize().y << std::endl;
     rect.height = texture.getSize().y;
     rect.width = texture.getSize().x / n_frames;
-    std::cout << "rect size: " << rect.width << ", " << rect.height << std::endl;
     sprite.setTextureRect(rect);
     sprite.setOrigin(rect.width / 2, rect.height / 2);
 }

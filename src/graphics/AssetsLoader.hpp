@@ -55,9 +55,7 @@ public:
         if (std::filesystem::exists(currentPath + "/" + filename)) {
             path = currentPath + "/" + filename;
         } else {
-            std::cout << "file not found" << std::endl;
             for (const auto& entry : std::filesystem::recursive_directory_iterator(currentPath)) {
-                std::cout << entry.path() << std::endl;
                 if (entry.path().filename() == filename) {
                     path = entry.path();
                     break;
@@ -69,7 +67,7 @@ public:
 
     T getSprite() { return sprite; }
 
-    T getTexture() { return texture; }
+    sf::Texture getTexture() { return texture; }
 
 private:
     sf::Texture texture;

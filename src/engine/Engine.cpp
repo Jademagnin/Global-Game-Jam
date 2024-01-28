@@ -8,10 +8,11 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Engine.hpp"
-#include "../Logging.hpp"
+#include "../utils/Logging.hpp"
 #include "../scene/Scenes/WhiteRectangle.hpp"
 #include "../scene/Scenes/BlackRectangle.hpp"
 #include "../scene/Scenes/Desktop.hpp"
+#include "../utils/Mouse.hpp"
 #include "../scene/Scenes/HomePage.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -31,6 +32,7 @@ Engine::Engine()
     // // Secondary scenes
     // _sceneManager.unstageScene(std::make_unique<WhiteRectangle>());
     // _sceneManager.unstageScene(std::make_unique<BlackRectangle>());
+    //_sceneManager.stageScene(std::make_unique<Mouse>(_window));
 
     LOG("Engine initialized successfully.");
 }
